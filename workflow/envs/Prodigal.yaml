@@ -1,0 +1,7 @@
+name: Predict genes and partial-genes with Prodigal
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - prodigal=2.6.3

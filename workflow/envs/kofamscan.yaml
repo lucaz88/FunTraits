@@ -1,0 +1,7 @@
+name: KEGG (hmm) annotation - with kofamscan
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - kofamscan=1.3.0

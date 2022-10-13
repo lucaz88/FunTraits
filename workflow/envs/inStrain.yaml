@@ -1,0 +1,9 @@
+name: inStrain - analysis of co-occurring genome populations from metagenomes
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - instrain=1.6.1
+  - parallel=20220222
+  - scipy=1.7

@@ -1,0 +1,15 @@
+name: SV analysis
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - minimap2=2.24
+  # - bcftools=1.10.2
+  - tectonic
+  - python=3.8
+  - matplotlib
+  - samtools=1.14
+  - svim-asm=1.0.2
+  # - gsl=2.5
+  - libcryptominisat

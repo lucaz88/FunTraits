@@ -1,0 +1,10 @@
+name: MAG/SAG/genome statistic
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - samtools=1.14
+  - coverm=0.6.1
+  - checkm-genome=1.1.3
+  - gtdbtk=1.7.0

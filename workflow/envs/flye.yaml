@@ -1,0 +1,7 @@
+name: Flye assembler for single-molecule sequencing reads (e.g. PacBio and Nanopore)
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - flye=2.9

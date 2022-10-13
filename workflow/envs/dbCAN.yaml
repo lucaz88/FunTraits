@@ -1,0 +1,15 @@
+name: dbCAN3 for CAZy annotations
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - python=3.8
+  - diamond
+  - hmmer
+  - prodigal
+  - pip
+  - pip:
+    - dbcan==3.0.4
+    # - cazy-parser==1.4.2 #??? library issue with python3
+

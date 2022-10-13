@@ -1,0 +1,7 @@
+name: antiSMASH annotation pipelines
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - antismash=6.1.1

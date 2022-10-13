@@ -1,0 +1,21 @@
+name: BioV suite - transporter annotation
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - python=2.7.18 
+  - pip=19.3.1
+  - biopython=1.75 
+  - blast 
+  - matplotlib 
+  - mechanize 
+  - scipy
+  # - pip:
+  #   - git+https://github.com/SaierLaboratory/BioVx.git # ??? uses a /tmp which is not writtable
+variables:
+  HOME: /gpfs/data/fs71579/lucaz/_DBs/TCdb #! these folder path has to exist already
+  BIOVX_PATH: /gpfs/data/fs71579/lucaz/_TOOLs/BioVx/scripts
+  HMMTOP_PATH: /gpfs/data/fs71579/lucaz/_TOOLs/hmmtop_2.1
+  HMMTOP_PSV: /gpfs/data/fs71579/lucaz/_TOOLs/hmmtop_2.1/hmmtop.psv
+  HMMTOP_ARCH: /gpfs/data/fs71579/lucaz/_TOOLs/hmmtop_2.1/hmmtop.arch

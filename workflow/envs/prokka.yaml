@@ -1,0 +1,7 @@
+name: prokka annotation
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - prokka=1.14.5

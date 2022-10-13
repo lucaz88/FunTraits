@@ -1,0 +1,25 @@
+# cores: # is overruled by Snakemake config file
+#   10
+jobs:
+  3
+
+use-conda:
+  True
+conda-frontend:
+  mamba
+conda-prefix: # avoid duplication of envs but it's impossible to simultaneously fetch 2 envs from 2 different snakemake projects
+  "~/VSC5_data/snakemake_envs/conda" 
+
+use-singularity:
+  True
+singularity-prefix:
+  "~/VSC5_data/snakemake_envs/singularity"
+
+printshellcmds: 
+  True
+keep-going: 
+  True
+rerun-incomplete: 
+  True
+# keep-incomplete: # good for debugging
+#   True

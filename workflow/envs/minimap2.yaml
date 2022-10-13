@@ -1,0 +1,11 @@
+name: Mapping reads/contigs/genomes to contigs/genomes with Minimap2
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - minimap2=2.24
+  - samtools=1.14
+  - python=3.7
+  - pip:
+    - filtersam==0.0.8
