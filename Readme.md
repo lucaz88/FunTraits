@@ -8,11 +8,11 @@ This repo contains a Snakmeake implementation of the annotation pipeline publish
 * AntiSMASH (for secondary metabolites)
 * Vibrioferrin biosynthesis and transport (blastp against UniProt)
 * DMSP degradation pathways (blastp against UniProt)
-* 
+* dbCAN (for automated carbohydrate-active enzyme annotation)
 
 Thanks to the Snakemake architecture, it offers an easy scalability from local server to cluster computer. It's also easily expandable by new annotation tools.
 
-Provided outputs:
+Outputs that will be generated in the `results` and `plots` folders are:
 
 * `MASTER_table.tsv` containing the comprehensive summary of all annotations. It's based on a GFF format in which each row represent a gene of a genomes in the input directory, while the columns holds the information of gene location and functional annotations.
 *  An interactive HTML heatmap `hm_MASTERtraits_jacc.html` representing the annotated traits across genomes
@@ -32,11 +32,11 @@ Open a terminal and fetch the code from GitHub:
 
 You can either test the WF with the two provided genomes in the folder `input_genomes`, or you can delete them and place your desired genomes in that folder.
 
-Genomes are expected to be placed in that specific folder (i.e. `input_genomes`) and have the extension `.fna`. However you can change these two parameters by editing the variables `genome_dir` and `genome_ext` in the file `workflow/Run_FunLuca.smk.`
+Genomes are expected to be placed in that specific folder (i.e. `input_genomes`), have the extension `.fna` and not be compressed. However you can change these parameters by editing the variables `genome_dir`, `genome_ext` and `sfds` in the file `workflow/Run_FunLuca.smk`.
 
 #### Edit the Snakemake config file
 
-\###
+This files controls how Snakemake use the available resources to run the WF. Two files are already provided to run on local (`configs/snakemake/local/config.yaml`) and on a computing cluster (`configs/snakemake/sbatch/config.yaml`), however check the "Profiles" section in the Snakemake documentation (https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles) to learn how to properly tune such file.
 
 #### Run the WF
 

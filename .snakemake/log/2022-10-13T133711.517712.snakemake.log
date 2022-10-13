@@ -1,0 +1,3 @@
+NameError in line 61 of /home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/Run_FunLuca.smk:
+name 'genome_plot' is not defined
+  File "/home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/Run_FunLuca.smk", line 61, in <module>

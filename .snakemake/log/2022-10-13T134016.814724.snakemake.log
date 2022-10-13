@@ -1,0 +1,4 @@
+NameError in line 68 of /home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/rules/FunLuca.smk:
+name 'gnm_table' is not defined
+  File "/home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/Run_FunLuca.smk", line 75, in <module>
+  File "/home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/rules/FunLuca.smk", line 68, in <module>

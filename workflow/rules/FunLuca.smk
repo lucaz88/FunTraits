@@ -21,7 +21,7 @@ rule heatmap_master_table:
     Generate heat-map with traits in MASTER table.
     """
     input:
-        MASTER_table = os.path.join(annotation_dir, "MASTER_table.tsv"),
+        MASTER_table = os.path.join(output_dir, "MASTER_table.tsv"),
         gtdbtk_dir = gtdbtk_dir,
     output:
         outfile = trait_hm,
@@ -43,9 +43,9 @@ rule make_master_table:
     Combine all annotation tables into a MASTER table.
     """
     input:
-        ann_tables = expand(os.path.join(annotation_dir, "{module}_tab.tsv"), module = config["ann_modules"]),
+        ann_tables = expand(os.path.join(output_dir, "{module}_tab.tsv"), module = config["ann_modules"]),
     output:
-        MASTER_table = os.path.join(annotation_dir, "MASTER_table.tsv")
+        MASTER_table = os.path.join(output_dir, "MASTER_table.tsv")
     params:
         KM_long_names = config["KM_long_names"],
     conda:
@@ -64,10 +64,10 @@ rule parse_dbCAN:
     Edit R script to change the settings for hits filtering.
     """
     input:
-        CAZy_folder = expand(os.path.join(annotation_dir, "dbCAN_CAZy", "{genome}"), 
-                             genome=gnm_table.file_noext),
+        CAZy_folder = expand(os.path.join(output_dir, "dbCAN_CAZy", "{genome}"), 
+                             genome=genome_names),
     output:
-        CAZy_table = os.path.join(annotation_dir, "dbCAN_CAZy_tab.tsv")
+        CAZy_table = os.path.join(output_dir, "dbCAN_CAZy_tab.tsv")
     params:
         CAZy_subs = config["CAZy_subs"],
     conda:
@@ -78,14 +78,14 @@ rule parse_dbCAN:
 
 rule run_dbCAN:
     """
-    Run blast against custom database of DMSP degradation genes.
+    Run the automated Carbohydrate-active enzyme ANnotation.
     """
     input:
-        i_gnm_dir = os.path.join(annotation_dir, "prokka", "{genome}"),
+        i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
         ref_db = config["dbCAN_db"],
     output:
-        i_cazy = directory(os.path.join(annotation_dir, "dbCAN_CAZy", "{genome}")),
-        i_no_seq_gff = temp(os.path.join(annotation_dir, "dbCAN_CAZy", "{genome}", "no_seq.gff")),
+        i_cazy = directory(os.path.join(output_dir, "dbCAN_CAZy", "{genome}")),
+        i_no_seq_gff = temp(os.path.join(output_dir, "dbCAN_CAZy", "{genome}", "no_seq.gff")),
     params:
         core = config["ann_CORE"],
     conda:
@@ -117,10 +117,10 @@ rule parse_DMSP:
     Edit R script to change the settings for hits filtering.
     """
     input:
-        DMSP_files = expand(os.path.join(annotation_dir, "blast_DMSP", "{genome}.tsv"), 
-                               genome=gnm_table.file_noext),
+        DMSP_files = expand(os.path.join(output_dir, "blast_DMSP", "{genome}.tsv"), 
+                               genome=genome_names),
     output:
-        blast_DMSP_tab = os.path.join(annotation_dir, "blast_DMSP_tab.tsv")
+        blast_DMSP_tab = os.path.join(output_dir, "blast_DMSP_tab.tsv")
     conda:
         "../envs/R_data_parsing.yaml"
     script:
@@ -132,10 +132,10 @@ rule blast_DMSP:
     Run blast against custom database of DMSP degradation genes.
     """
     input:
-        i_gnm_dir = os.path.join(annotation_dir, "prokka", "{genome}"),
+        i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
         ref_token = config["DMSP_db"]+"_token", 
     output:
-        i_phytohormone = os.path.join(annotation_dir, "blast_DMSP", "{genome}.tsv"),
+        i_phytohormone = os.path.join(output_dir, "blast_DMSP", "{genome}.tsv"),
     params:
         core = config["ann_CORE"],
         ref_db = config["DMSP_db"],
@@ -193,10 +193,10 @@ rule parse_vibrioferrin:
     Edit R script to change the settings for hits filtering.
     """
     input:
-        vibferr_files = expand(os.path.join(annotation_dir, "blast_vibrioferrin", "{genome}.tsv"), 
-                               genome=gnm_table.file_noext),
+        vibferr_files = expand(os.path.join(output_dir, "blast_vibrioferrin", "{genome}.tsv"), 
+                               genome=genome_names),
     output:
-        blast_vibrioferrin_tab = os.path.join(annotation_dir, "blast_vibrioferrin_tab.tsv")
+        blast_vibrioferrin_tab = os.path.join(output_dir, "blast_vibrioferrin_tab.tsv")
     conda:
         "../envs/R_data_parsing.yaml"
     script:
@@ -208,10 +208,10 @@ rule blast_vibrioferrin:
     Run blast against custom database of vibrioferrin production & uptake genes.
     """
     input:
-        i_gnm_dir = os.path.join(annotation_dir, "prokka", "{genome}"),
+        i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
         ref_token = config["vibrioferrin_db"]+"_token", 
     output:
-        i_vibrioferrin = os.path.join(annotation_dir, "blast_vibrioferrin", "{genome}.tsv"),
+        i_vibrioferrin = os.path.join(output_dir, "blast_vibrioferrin", "{genome}.tsv"),
     params:
         core = config["ann_CORE"],
         ref_db = config["vibrioferrin_db"],
@@ -269,11 +269,11 @@ rule parse_phytohormones:
     Edit R script to change the settings for hits filtering.
     """
     input:
-        phyhorm_files = expand(os.path.join(annotation_dir, "blast_phytohormones", "{genome}.tsv"), 
-                               genome=gnm_table.file_noext),
+        phyhorm_files = expand(os.path.join(output_dir, "blast_phytohormones", "{genome}.tsv"), 
+                               genome=genome_names),
         suppl_tab = config["phyhorm_suppl_tab"],
     output:
-        blast_phytohormones_tab = os.path.join(annotation_dir, "blast_phytohormones_tab.tsv")
+        blast_phytohormones_tab = os.path.join(output_dir, "blast_phytohormones_tab.tsv")
     conda:
         "../envs/R_data_parsing.yaml"
     script:
@@ -285,10 +285,10 @@ rule blast_phytohormones:
     Run blast against custom database of phytohormone production genes.
     """
     input:
-        i_gnm_dir = os.path.join(annotation_dir, "prokka", "{genome}"),
+        i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
         ref_token = config["phytohormones_db"]+"_token", 
     output:
-        i_phytohormone = os.path.join(annotation_dir, "blast_phytohormones", "{genome}.tsv"),
+        i_phytohormone = os.path.join(output_dir, "blast_phytohormones", "{genome}.tsv"),
     params:
         core = config["ann_CORE"],
         ref_db = config["phytohormones_db"],
@@ -347,10 +347,10 @@ rule parse_gblast:
     Edit R script to change the settings for hits filtering.
     """
     input:
-        transp_folder = expand(os.path.join(annotation_dir, "BioV_transp", "{genome}"), 
-                               genome=gnm_table.file_noext),
+        transp_folder = expand(os.path.join(output_dir, "BioV_transp", "{genome}"), 
+                               genome=genome_names),
     output:
-        BioV_transp_tab = os.path.join(annotation_dir, "BioV_transp_tab.tsv")
+        BioV_transp_tab = os.path.join(output_dir, "BioV_transp_tab.tsv")
     params:
         transp_set = config["transp_set"]
     conda:
@@ -364,9 +364,9 @@ rule run_gblast:
     Run gblast script of the BioV suit to annotate transporters using TCdb.
     """
     input:
-        i_gnm_dir = os.path.join(annotation_dir, "prokka", "{genome}"),
+        i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
     output:
-        i_transp = directory(os.path.join(annotation_dir, "BioV_transp", "{genome}")),
+        i_transp = directory(os.path.join(output_dir, "BioV_transp", "{genome}")),
     container:
         "docker://cimendes/mhm2"
     # conda:
@@ -401,12 +401,12 @@ rule parse_antismash:
     Merge all secondary metabolite annotations from antiSMASH into a unique table.
     """
     input:
-        html_folder = expand(os.path.join(annotation_dir, "antiSMASH", "{genome}"), 
-                             genome=gnm_table.file_noext),
-        gff_folder = expand(os.path.join(annotation_dir, "prokka", "{genome}"), 
-                            genome=gnm_table.file_noext),
+        html_folder = expand(os.path.join(output_dir, "antiSMASH", "{genome}"), 
+                             genome=genome_names),
+        gff_folder = expand(os.path.join(output_dir, "prokka", "{genome}"), 
+                            genome=genome_names),
     output:
-        antiSMASH_tab = os.path.join(annotation_dir, "antiSMASH_tab.tsv")
+        antiSMASH_tab = os.path.join(output_dir, "antiSMASH_tab.tsv")
     conda:
         "../envs/R_data_parsing.yaml"
     script:
@@ -418,10 +418,10 @@ rule run_antismash:
     Run antiSMASH to annotate secondary metaolites.
     """
     input:
-        i_gnm_dir = os.path.join(annotation_dir, "prokka", "{genome}"),
+        i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
         antismash_db = config["antim_db"],
     output:
-        i_KO = directory(os.path.join(annotation_dir, "antiSMASH", "{genome}")),
+        i_KO = directory(os.path.join(output_dir, "antiSMASH", "{genome}")),
     params:
         core = config["ann_CORE"], 
     conda:
@@ -462,9 +462,9 @@ rule parse_manual_fromKOs:
     Currently implemented trait: DHPS and taurine utilization.
     """
     input:
-        KEGG_KO_tab = os.path.join(annotation_dir, "KEGG_KO_tab.tsv"),
+        KEGG_KO_tab = os.path.join(output_dir, "KEGG_KO_tab.tsv"),
     output:
-        KEGG_manual_tab = os.path.join(annotation_dir, "KEGG_manual_tab.tsv")
+        KEGG_manual_tab = os.path.join(output_dir, "KEGG_manual_tab.tsv")
     conda:
         "../envs/R_data_parsing.yaml"
     script:
@@ -476,9 +476,9 @@ rule KM_reconstruction_wrapper:
     Recombine KO annotations into a list of complete KEGG modules and add this info to the kofamscan table.
     """
     input:
-        KEGG_KO_tab = os.path.join(annotation_dir, "KEGG_KO_tab.tsv"),
+        KEGG_KO_tab = os.path.join(output_dir, "KEGG_KO_tab.tsv"),
     output:
-        KEGG_KM_tab = os.path.join(annotation_dir, "KEGG_KM_tab.tsv"),
+        KEGG_KM_tab = os.path.join(output_dir, "KEGG_KM_tab.tsv"),
     params:
         KM_str = config["KM_str"],
         ncore = config["ann_CORE"], 
@@ -494,10 +494,10 @@ rule parse_kofamscan:
     Only signif annotation are retained, see https://doi.org/10.1093/bioinformatics/btz859).
     """
     input:
-        ko_files = expand(os.path.join(annotation_dir, "KEGG_KO", "{genome}_ko.txt"), 
-                          genome=gnm_table.file_noext),
+        ko_files = expand(os.path.join(output_dir, "KEGG_KO", "{genome}_ko.txt"), 
+                          genome=genome_names),
     output:
-        KEGG_KO_tab = os.path.join(annotation_dir, "KEGG_KO_tab.tsv")
+        KEGG_KO_tab = os.path.join(output_dir, "KEGG_KO_tab.tsv")
     conda:
         "../envs/R_data_parsing.yaml"
     script:
@@ -509,12 +509,12 @@ rule run_kofamscan:
     Run kofamscan to annotate KOs.
     """
     input:
-        i_gnm_dir = os.path.join(annotation_dir, "prokka", "{genome}"),
+        i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
         kegg_profiles = os.path.join(config["kegg_db"], "profiles"),
         kegg_ko_list = os.path.join(config["kegg_db"], "ko_list"),
     output:
-        i_KO = os.path.join(annotation_dir, "KEGG_KO", "{genome}_ko.txt"),
-        i_tmp = directory(os.path.join(annotation_dir, "KEGG_KO", "{genome}")),
+        i_KO = os.path.join(output_dir, "KEGG_KO", "{genome}_ko.txt"),
+        i_tmp = directory(os.path.join(output_dir, "KEGG_KO", "{genome}")),
     params:
         core = 100 #config["ann_CORE"], 
     conda:
@@ -542,10 +542,10 @@ rule parse_prokka:
     Merge all GFF files from prokka into a unique table.
     """
     input:
-        gff_folder = expand(os.path.join(annotation_dir, "prokka", "{genome}"), 
-                            genome=gnm_table.file_noext),
+        gff_folder = expand(os.path.join(output_dir, "prokka", "{genome}"), 
+                            genome=genome_names),
     output:
-        GFF_table = os.path.join(annotation_dir, "prokka_tab.tsv")
+        GFF_table = os.path.join(output_dir, "prokka_tab.tsv")
     conda:
         "../envs/R_data_parsing.yaml"
     script:
@@ -558,9 +558,9 @@ rule run_prokka:
     """
     input:
         i_gnm = lambda wildcards: os.path.join(gnm_dir, 
-                                  gnm_table.file[gnm_table.file_noext == wildcards.genome].squeeze()),
+                                  genome_tab.file[genome_names == wildcards.genome].squeeze()),
     output:
-        i_gnm_dir = directory(os.path.join(annotation_dir, "prokka", "{genome}")),
+        i_gnm_dir = directory(os.path.join(output_dir, "prokka", "{genome}")),
     params:
         core = config["ann_CORE"], 
     conda:

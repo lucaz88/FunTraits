@@ -1,0 +1,4 @@
+WorkflowError in line 75 of /home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/Run_FunLuca.smk:
+Failed to open source file /home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/../rules/FunLuca.smk
+FileNotFoundError: [Errno 2] No such file or directory: '/home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/../rules/FunLuca.smk'
+  File "/home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/Run_FunLuca.smk", line 75, in <module>

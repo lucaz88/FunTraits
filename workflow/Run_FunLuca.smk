@@ -35,29 +35,27 @@ from scripts.myPy_FUN import which_drep
 #! setting vars
 genome_dir = "input_genomes"
 genome_ext = ".fna"
-sample_tab = find_inputs(genome_dir, genome_ext, 
-                      double_ext=True, uniq_PE=True)
-sample_names = col2list(sample_tab, "uniq_PE")
+genome_compressed = False # accepts False or True
+output_dir = "results"
+plot_dir = "plots"
 
 
 
 #! genome analysis
-coverm_list = expand(os.path.join(genome_anal_dir, 'coverm', '{sample}'),
-                     sample=sample_names)
-profile_list = expand(os.path.join(genome_anal_dir, 'instrain', '{sample}'),
-                     sample=sample_names)
+genome_tab = find_inputs(genome_dir, genome_ext, 
+                      double_ext=False)
+genome_names = col2list(genome_tab, "file_noext")
 run_basic = [
-    os.path.join(genome_anal_dir, 'checkm'),
-    os.path.join(genome_anal_dir, 'gtdbtk'),
+    os.path.join(output_dir, 'checkm'),
+    os.path.join(output_dir, 'gtdbtk'),
 ]
-run_coverm = os.path.join(genome_anal_dir, 'coverm', "merged_TPM.tsv")
 
 
 
 #! genome annotation
-gnm_dir = os.path.join(genome_anal_dir, 'drep_fasta')
-gtdbtk_dir = os.path.join(genome_anal_dir, 'gtdbtk')
-trait_hm = os.path.join(genome_plot, 'hm_MASTERtraits_jacc.html')
+gnm_dir = os.path.join(output_dir, 'drep_fasta')
+gtdbtk_dir = os.path.join(output_dir, 'gtdbtk')
+trait_hm = os.path.join(plot_dir, 'hm_MASTERtraits_jacc.html')
 run_FunLuca = trait_hm
 
 
@@ -70,8 +68,8 @@ rule all:
 
 
 #! load pipelines
-include: "../rules/FunLuca.smk"
-include: "../rules/get_reports.smk"
+include: "rules/FunLuca.smk"
+include: "rules/get_DBs.smk"
 
 
 

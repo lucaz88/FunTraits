@@ -1,0 +1,5 @@
+SystemExit in line 46 of /home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/Run_FunLuca.smk:
+None
+  File "/home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/Run_FunLuca.smk", line 46, in <module>
+  File "/home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/scripts/myPy_FUN.py", line 198, in col2list
+  File "/home/lucaz/mambaforge/envs/snakemake/lib/python3.10/_sitebuiltins.py", line 26, in __call__
