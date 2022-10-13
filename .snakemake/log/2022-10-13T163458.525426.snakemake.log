@@ -1,0 +1,4 @@
+NameError in line 17 of /home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/rules/genome_analysis.smk:
+name 'is_long_reads' is not defined
+  File "/home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/Run_FunLuca.smk", line 72, in <module>
+  File "/home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/rules/genome_analysis.smk", line 17, in <module>
