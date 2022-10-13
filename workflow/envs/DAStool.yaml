@@ -1,9 +1,0 @@
-name: Binning refinement with DAS Tool
-channels:
-  - defaults
-  - bioconda
-  - conda-forge
-dependencies:
-  - das_tool=1.1.4
-  - python=3.8.10 
-  - pandas=1.4.2 

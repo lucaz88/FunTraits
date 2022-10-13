@@ -1,7 +1,0 @@
-name: ultra fast and sensitive sequence search and clustering suite
-channels:
-  - defaults
-  - bioconda
-  - conda-forge
-dependencies:
-  - mmseqs2=13.45111

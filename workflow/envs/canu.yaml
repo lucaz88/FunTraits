@@ -1,7 +1,0 @@
-name: Canu assembler for single-molecule sequencing reads (e.g. PacBio and Nanopore)
-channels:
-  - defaults
-  - bioconda
-  - conda-forge
-dependencies:
-  - canu=2.2

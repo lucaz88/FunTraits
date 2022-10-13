@@ -1,8 +1,0 @@
-name: ANI analysis
-channels:
-  - defaults
-  - bioconda
-  - conda-forge
-dependencies:
-  - python=3.7
-  - pyani=0.2.11

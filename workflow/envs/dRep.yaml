@@ -1,9 +1,0 @@
-name: dereplicate draf-genomes with dRep
-channels:
-  - defaults
-  - bioconda
-  - conda-forge
-dependencies:
-  - drep=3.4.0
-  - checkm-genome=1.2.0
-  - parallel=20220222

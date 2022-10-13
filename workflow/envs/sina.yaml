@@ -1,7 +1,0 @@
-name: blast
-channels:
-  - defaults
-  - bioconda
-  - conda-forge
-dependencies:
-  - sina=1.7.2

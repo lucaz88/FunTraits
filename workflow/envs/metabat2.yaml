@@ -1,7 +1,0 @@
-name: Binning assembled contigs with MetaBAT2
-channels:
-  - defaults
-  - bioconda
-  - conda-forge
-dependencies:
-  - metabat2=2.15 

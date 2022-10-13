@@ -14,34 +14,6 @@ TODO:
 
 
 
-##### special plots                
-
-rule plot_FunLuca_MAGs:
-    """
-    Generate heat-map with traits mapped across MAGs.
-    """
-    input:
-        merged_tpm = os.path.join(analysis_dir, 'coverm', "merged_TPM.tsv"),
-        MASTER_table = os.path.join(annotation_dir, "MASTER_table.tsv"),
-    output:
-        out_dir = directory(MAG_trait_dir),
-    params:
-        ann_modules = config["ann_modules"],
-        taxa_col = config["taxa_col"],
-        # smpl_col = config["smpl_col"],
-        min_trait_occur = config["min_trait_occur"],
-        min_tpm = config["min_tpm"],
-        dist_mt = config["dist_mt"],
-        aggl_mt = config["aggl_mt"],
-    conda:
-        "../envs/R_plots.yaml"
-    script:
-        "../workflow/scripts/plot_FunLuca_MAGs.R"
-
-
-
-
-
 ##### overal plots                
     
 rule heatmap_master_table:

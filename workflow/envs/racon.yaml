@@ -1,9 +1,0 @@
-name: Assembly refinement with racon
-channels:
-  - defaults
-  - bioconda
-  - conda-forge
-dependencies:
-  - racon=1.5.0
-  - bbmap=38.96
-  - bowtie2=2.4.5 

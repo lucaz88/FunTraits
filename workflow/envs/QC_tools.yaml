@@ -1,9 +1,0 @@
-name: Agrregates sequence QC from multiple samples
-channels:
-  - defaults
-  - bioconda
-  - conda-forge
-dependencies:
-  - multiqc=1.12
-  - fastqc=0.11.9
-  - r-base=4.1.3
