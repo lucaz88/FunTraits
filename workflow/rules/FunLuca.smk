@@ -347,7 +347,7 @@ rule run_gblast:
     output:
         i_transp = directory(os.path.join(output_dir, "BioV_transp", "{genome}")),
     container:
-        "docker://cimendes/biovx"
+        "docker://lucaz88/biovx"
     # conda:
     #     "../envs/BioVx.yaml",
     log:

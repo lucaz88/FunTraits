@@ -1,6 +1,6 @@
 # Snakemake workflow for genetic trait annotation
 
-This repo contains a Snakmeake implementation of the annotation pipeline published in  <https://www.nature.com/articles/s42003-022-03184-4> . It allows for and easy implementation and deployment of several annotation tools:
+This repo contains a Snakmeake implementation of the annotation pipeline published in  <https://www.nature.com/articles/s42003-022-03184-4> . It allows for and easy implementation and deployment of several **annotation tools**:
 
 * prokka
 * KEGG Orthology (including insight analyses of phytohormones production, DHPS and taurine utilization)
@@ -12,7 +12,7 @@ This repo contains a Snakmeake implementation of the annotation pipeline publish
 
 Thanks to the Snakemake architecture, it offers an easy scalability from local server to cluster computer. It's also easily expandable by new annotation tools.
 
-The generated outputs are:
+The **generated outputs** are:
 
 * `results/MASTER_table.tsv` containing the comprehensive summary of all annotations. It's based on a GFF format in which each row represent a gene of a genomes in the input directory, while the columns holds the information of gene location and functional annotations.
 * Genome stats about completness (using CheckM) and taxonomy (using GTDB-Tk) in the folders `results/checkm` and `results/gtdbtk`
@@ -40,7 +40,9 @@ You need to have Snakemake and Singularity installed properly in your system. Yo
 
 Then fetch the code repository from GitHub:
 
-`git https://github.com/lucaz88/FunLuca.git`
+    git clone https://github.com/lucaz88/FunLuca.git
+    cd FunLuca
+    ls
 
 #### Prepare input files
 
