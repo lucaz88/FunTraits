@@ -25,6 +25,32 @@ configfile: "configs/FunLuca_config.yaml"
 
 #! import python modules
 import os
+from scripts.myPy_FUN import find_inputs
+from scripts.myPy_FUN import col2list
+from scripts.myPy_FUN import comb_lists
+from scripts.myPy_FUN import which_drep
+
+
+
+#! setting vars
+genome_dir = "input_genomes"
+genome_ext = ".fna"
+sample_tab = find_inputs(genome_dir, genome_ext, 
+                      double_ext=True, uniq_PE=True)
+sample_names = col2list(sample_tab, "uniq_PE")
+
+
+
+#! genome analysis
+coverm_list = expand(os.path.join(genome_anal_dir, 'coverm', '{sample}'),
+                     sample=sample_names)
+profile_list = expand(os.path.join(genome_anal_dir, 'instrain', '{sample}'),
+                     sample=sample_names)
+run_basic = [
+    os.path.join(genome_anal_dir, 'checkm'),
+    os.path.join(genome_anal_dir, 'gtdbtk'),
+]
+run_coverm = os.path.join(genome_anal_dir, 'coverm', "merged_TPM.tsv")
 
 
 
@@ -50,7 +76,7 @@ include: "../rules/get_reports.smk"
 
 
 #! useful bash commands
-# git clone https://github.com/lucaz88/CF_codes.git
+# git https://github.com/lucaz88/FunLuca.git
 # conda activate snakemake
 # snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/local -pn
 # snakemake -s workflow/Run_FunLuca.smk --forceall --rulegraph | dot -Tpdf > dag.pdf
