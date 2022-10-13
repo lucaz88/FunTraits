@@ -1,4 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 19 of /home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/rules/FunLuca.smk:
-Missing input files for rule heatmap_master_table:
-results/gtdbtk

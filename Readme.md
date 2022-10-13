@@ -17,7 +17,7 @@ Outputs that will be generated in the `results` and `plots` folders are:
 * `MASTER_table.tsv` containing the comprehensive summary of all annotations. It's based on a GFF format in which each row represent a gene of a genomes in the input directory, while the columns holds the information of gene location and functional annotations.
 *  An interactive HTML heatmap `hm_MASTERtraits_jacc.html` representing the annotated traits across genomes
 
-#### ToDo list
+### TODO list
 
 * add full genome report with checkM, GTKDB
 * add rules for mapping genomes to fastq files and make plots

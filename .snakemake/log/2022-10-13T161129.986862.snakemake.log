@@ -1,4 +1,0 @@
-Building DAG of jobs...
-MissingInputException in line 316 of /home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/rules/FunLuca.smk:
-Missing input files for rule makeblastdb_phytohormones:
-CF_codes/_databases/custom_fasta/Protein_sequences_for_phytohormone_pathways_annotation.fasta
