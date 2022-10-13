@@ -12,6 +12,25 @@ TODO:
 """
 
 
+rule update_GTDBTk_db:
+    output:
+        GTDBTk_dir = directory(config["GTDBTk_dir"]),
+        GTDBTk_token = config["GTDBTk_db"],
+    conda:
+        "../envs/GTDB_Tk.yaml",
+    shell:
+        '''
+        cmd="
+        test -d {output.GTDBTk_dir} || mkdir {output.GTDBTk_dir};
+        cd {output.GTDBTk_dir};
+        wget https://data.ace.uq.edu.au/public/gtdb/data/releases/latest/auxillary_files/gtdbtk_v2_data.tar.gz;
+        tar xvzf gtdbtk_v2_data.tar.gz;
+        touch {output.GTDBTk_token};
+        ";
+        eval $cmd
+        '''
+
+        
 rule update_dbCAN_DB:
     output:
         dbCAN_dir = directory(config["dbCAN_db"]),

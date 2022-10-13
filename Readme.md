@@ -12,21 +12,21 @@ This repo contains a Snakmeake implementation of the annotation pipeline publish
 
 Thanks to the Snakemake architecture, it offers an easy scalability from local server to cluster computer. It's also easily expandable by new annotation tools.
 
-Outputs that will be generated in the `results` and `plots` folders are:
+The generated outputs are:
 
-* `MASTER_table.tsv` containing the comprehensive summary of all annotations. It's based on a GFF format in which each row represent a gene of a genomes in the input directory, while the columns holds the information of gene location and functional annotations.
-*  An interactive HTML heatmap `hm_MASTERtraits_jacc.html` representing the annotated traits across genomes
+* `results/MASTER_table.tsv` containing the comprehensive summary of all annotations. It's based on a GFF format in which each row represent a gene of a genomes in the input directory, while the columns holds the information of gene location and functional annotations.
+* Genome stats about completness (using CheckM) and taxonomy (using GTDB-Tk) in the folders `results/checkm` and `results/gtdbtk`
+* An interactive HTML heatmap `hm_MASTERtraits_jacc.html` representing the annotated traits across genomes
 
 ### TODO list
 
-* add full genome report with checkM, GTKDB
-* add rules for mapping genomes to fastq files and make plots
+* add feauture for mapping genomes to fastq files and make plots (code ready, just need implementation)
 
 ## How to run
 
 #### Set up the environment
 
-You need to have Snakemake installed properly in your system. You can usually achieve this by running the following commands but refer the official documentation for any issue or doubts (<https://snakemake.readthedocs.io/en/stable/getting_started/installation.html>). In the terminal type:
+You need to have Snakemake and Singularity installed properly in your system. You can usually achieve this by running the following commands but refer the official documentations for any issue or doubts (<https://snakemake.readthedocs.io/en/stable/getting_started/installation.html> and <https://docs.sylabs.io/guides/3.0/user-guide/installation.html#installation>). In the terminal type:
 
     wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.12.0-Linux-x86_64.sh
     chmod +x Miniconda3-py38_4.12.0-Linux-x86_64.sh
@@ -35,6 +35,8 @@ You need to have Snakemake installed properly in your system. You can usually ac
     conda update conda
     conda install mamba -n base -c conda-forge
     mamba create -c conda-forge -c bioconda -n snakemake snakemake
+    conda activate snakemake
+    conda install -c conda-forge singularity
 
 Then fetch the code repository from GitHub:
 
@@ -49,10 +51,11 @@ Genomes are expected to be placed in that specific folder (i.e. `input_genomes`)
 #### Edit the Snakemake config file
 
 This files controls how Snakemake use the available resources to run the WF. Two files are already provided to run on local (`configs/snakemake/local/config.yaml`) and on a computing cluster (`configs/snakemake/sbatch/config.yaml`), however check the "Profiles" section in the Snakemake documentation (https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles) to learn how to properly tune such file.
+Maybe something you wanna set are the values `jobs` and `cores`, which control the degree of parallelization (i.e. the number of jobs to execute in parallel and how many cores EACH job can take), and adjust them to the resources available in your system. E.g. if your computer has 32 cores you could run 6 jobs in parallel with 5 cores each.
 
 #### Run the WF
 
-In the terminal, prompt the following command to check that everything works properly:
+In the terminal, activate Snakemake (if you haven't done already) with `conda activate snakemake` and prompt the following command to check that everything works properly:
 
 `snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/local -pn`
 

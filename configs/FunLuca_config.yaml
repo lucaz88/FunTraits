@@ -1,7 +1,10 @@
 #! global params
 nCORE:
   250 # cores used per single job
-
+GTDBTk_dir:
+  "databases/GTDBTk"
+GTDBTk_db:
+  "databases/GTDBTk/GTDBTk_token"
 
 
 #! modules to run:

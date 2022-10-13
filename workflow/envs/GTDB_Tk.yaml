@@ -6,4 +6,4 @@ channels:
 dependencies:
   - gtdbtk=2.1.0
 variables:
-  GTDBTK_DATA_PATH: /gpfs/data/fs71579/lucaz/_DBs/GTDBTk/release207_v2 #! has to match DB path created with 'get_DBs_config.yaml'
+  GTDBTK_DATA_PATH: databases/GTDBTk/release207_v2 #! has to match DB path created with 'get_DBs_config.yaml'

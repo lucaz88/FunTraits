@@ -23,12 +23,13 @@ default-resources:
   # - disk_mb=max(2*input.size_mb, 10000)
 
 
-# cores: # is overruled by Snakemake config file
-#   88
 jobs:
-  1000
+  100
+cores: # is overruled by Snakemake config file
+  88
 cluster-cancel: # kill submitted jobs when killing a snakemake run
   scancel
+
 
 use-conda:
   True
@@ -37,10 +38,12 @@ conda-frontend:
 conda-prefix: # avoid duplication of envs but it's impossible to simultaneously fetch 2 envs from 2 different snakemake projects
   "~/VSC5_data/snakemake_envs/conda" 
 
+
 use-singularity:
   True
 singularity-prefix:
   "~/VSC5_data/snakemake_envs/singularity"
+
 
 printshellcmds: 
   True

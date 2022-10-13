@@ -1,0 +1,7 @@
+name: Assess the quality of microbial genomes with CheckM.
+channels:
+  - defaults
+  - bioconda
+  - conda-forge
+dependencies:
+  - checkm-genome=2.1.0

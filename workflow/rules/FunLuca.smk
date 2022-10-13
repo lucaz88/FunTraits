@@ -14,29 +14,7 @@ TODO:
 
 
 
-##### overal plots                
-    
-rule heatmap_master_table:
-    """
-    Generate heat-map with traits in MASTER table.
-    """
-    input:
-        MASTER_table = os.path.join(output_dir, "MASTER_table.tsv"),
-        gtdbtk_dir = gtdbtk_dir,
-    output:
-        outfile = trait_hm,
-    params:
-        ann_modules = config["ann_modules"],
-        taxa_col = config["taxa_col"],
-        # smpl_col = config["smpl_col"],
-        min_trait_occur = config["min_trait_occur"],
-        dist_mt = config["dist_mt"],
-        aggl_mt = config["aggl_mt"],
-    conda:
-        "../envs/R_plots.yaml"
-    script:
-        "../workflow/scripts/plot_FunLuca_hm.R"
-
+##### summary table                
 
 rule make_master_table:
     """
@@ -57,7 +35,8 @@ rule make_master_table:
 
 
 
-##### annotation rules                
+##### annotation rules   
+
 rule parse_dbCAN:
     """
     Filter and merge CAZy annotations from dbCAN into a unique table.
@@ -368,7 +347,7 @@ rule run_gblast:
     output:
         i_transp = directory(os.path.join(output_dir, "BioV_transp", "{genome}")),
     container:
-        "docker://cimendes/mhm2"
+        "docker://cimendes/biovx"
     # conda:
     #     "../envs/BioVx.yaml",
     log:

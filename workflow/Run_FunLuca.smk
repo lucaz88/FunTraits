@@ -36,6 +36,7 @@ from scripts.myPy_FUN import which_drep
 genome_dir = "input_genomes"
 genome_ext = ".fna"
 genome_compressed = False # accepts False or True
+config["nCORE"] = 5 # adjust to the cores available in your system
 output_dir = "results"
 plot_dir = "plots"
 
@@ -53,22 +54,30 @@ run_basic = [
 
 
 #! genome annotation
-gnm_dir = os.path.join(output_dir, 'drep_fasta')
-gtdbtk_dir = os.path.join(output_dir, 'gtdbtk')
-trait_hm = os.path.join(plot_dir, 'hm_MASTERtraits_jacc.html')
-run_FunLuca = trait_hm
+run_FunLuca = os.path.join(output_dir, "MASTER_table.tsv")
+
+
+
+#! plots
+run_plots = [
+    os.path.join(plot_dir, 'hm_MASTERtraits_jacc.html'),
+    # os.path.join(plot_dir, 'hm_MASTERtraits_mapped.html'),
+]
 
 
 
 #! declare outputs
 rule all:
     input:
-        run_FunLuca
+        run_basic,
+        run_FunLuca,
+        run_plots
 
 
 
 #! load pipelines
 include: "rules/FunLuca.smk"
+include: "rules/plots.smk"
 include: "rules/genome_analysis.smk"
 include: "rules/get_DBs.smk"
 
