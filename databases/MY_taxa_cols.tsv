@@ -1,0 +1,47 @@
+Taxa	HEX	color	note
+Acidobacteria	#e5cce5	pink	
+Acidobacteriota	#e5cce5	pink	
+Actinobacteria	#D63230	red	
+Actinobacteriota	#D63230	red	
+Alphaproteobacteria	#1C77C3	blue	
+Aquificae	#c7e5fc	White-blue	
+Bacilli	#6b2ff9	Purple-blu	gtdbtk
+Bacteroidetes	#F39237	orange	
+Bacteroidota	#F39237	orange	
+Bacteroidia	#ffa500	orange	gtdbtk
+Bdellovibrionota	#c9a47f	Light-brown	
+Betaproteobacteria	#53cfaf	light water-green	
+Burkholderiales	#53cfaf	light water-green	
+Campylobacterota	#aeb640	Rotten-green	
+Chlorobi	#55FCD0	Acid-blue	
+Chloroflexi	#e24cbe	fucsia	
+Chloroflexota	#e24cbe	fucsia	gtdbtk
+Clostridia	#82674C	Light-brown	gtdbtk
+Cyanobacteria	#55D5FC	ciano	
+Deferribacteres	#f35f6c	peach	
+Deinococcus-Thermus	#003300	Dark-green	
+Deinococcota	#003300	Dark-green	
+Deltaproteobacteria	#a5682a	brown	
+Desulfobacterota	#fad414	dark-yellow	
+Epsilonproteobacteria	#aeb640	Rotten-green	
+Firmicutes	#ffff00	yellow	
+Gammaproteobacteria	#226453	Water-green	
+Gemmatimonadota	#523203	Dark-brown	
+Myxococcota	#9e907b	Light-brown	
+Nitrospirae	#7FBF7F	Light-green	
+Patescibacteria	#0000ff	Bright-blue	
+Planctomycetes	#9fdf5e	bright-green	
+Planctomycetota	#9fdf5e	bright-green	
+Spirochaetae	#705524	brown	
+Thermodesulfobacteria	#310c0c	Dark-brown	
+Thermotogae	#a6a6a6	grey	
+Vampirovibrionia	#b30001	red	gtdbtk
+Verrucomicrobia	#a64ca6	Light-purple	
+Verrucomicrobiota	#a64ca6	Light-purple	
+Verrucomicrobiae	#632D63	dark-purple	gtdbtk
+Others	#666666	dark-grey	
+NA	#cccccc	light-grey	
+Dinoflagellata	#c7e5fc	White-blue	
+Chlorophyta	#9fdf5e	bright-green	
+Ciliophora	#705524	brown	
+Ochrophyta	#fad414	dark-yellow	

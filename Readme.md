@@ -16,15 +16,27 @@ Outputs that will be generated in the `results` and `plots` folders are:
 
 * `MASTER_table.tsv` containing the comprehensive summary of all annotations. It's based on a GFF format in which each row represent a gene of a genomes in the input directory, while the columns holds the information of gene location and functional annotations.
 *  An interactive HTML heatmap `hm_MASTERtraits_jacc.html` representing the annotated traits across genomes
-* !!!ToDo add full genome report with checkM, GTKDB
 
-## How to run:
+#### ToDo list
+
+* add full genome report with checkM, GTKDB
+* add rules for mapping genomes to fastq files and make plots
+
+## How to run
 
 #### Set up the environment
 
-You need to have Snakemake installed properly in your system (<https://snakemake.readthedocs.io/en/stable/getting_started/installation.html>).
+You need to have Snakemake installed properly in your system. You can usually achieve this by running the following commands but refer the official documentation for any issue or doubts (<https://snakemake.readthedocs.io/en/stable/getting_started/installation.html>). In the terminal type:
 
-Open a terminal and fetch the code from GitHub:
+    wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.12.0-Linux-x86_64.sh
+    chmod +x Miniconda3-py38_4.12.0-Linux-x86_64.sh
+    bash Miniconda3-py38_4.12.0-Linux-x86_64.sh
+    # close and reopen the terminal
+    conda update conda
+    conda install mamba -n base -c conda-forge
+    mamba create -c conda-forge -c bioconda -n snakemake snakemake
+
+Then fetch the code repository from GitHub:
 
 `git https://github.com/lucaz88/FunLuca.git`
 

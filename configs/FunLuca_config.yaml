@@ -1,5 +1,5 @@
 #! global params
-ann_CORE:
+nCORE:
   250 # cores used per single job
 
 
@@ -26,13 +26,13 @@ ann_modules:
 
 ##! kofamscan
 kegg_db:
-  "/gpfs/data/fs71863/lucaz5/_DBs/KEGG/kofamscan"
+  "databases/KEGG/kofamscan"
 KM_str:
-  "CF_codes/_databases/KM_str.rds"
+  "databases/KM_str.rds"
 
 ##! antismash
 antim_db:
-  "/gpfs/data/fs71863/lucaz5/_DBs/antismash_token"
+  "databases/antismash_token"
 
 ##! gblast (BioVx)
 transp_set: # transporter set retained: all - B1_B12_B3_B7_SIDERO - WITH_SUBSTRATE - NO_GENERIC 
@@ -40,23 +40,23 @@ transp_set: # transporter set retained: all - B1_B12_B3_B7_SIDERO - WITH_SUBSTRA
 
 ##! blast-phytohormones
 phytohormones_db:
-  "/gpfs/data/fs71863/lucaz5/_DBs/custom_fasta/Protein_sequences_for_phytohormone_pathways_annotation.fasta"
+  "databases/custom_fasta/Protein_sequences_for_phytohormone_pathways_annotation.fasta"
 phyhorm_suppl_tab: # table providing manually curated pathway structures 
-  "/gpfs/data/fs71863/lucaz5/_DBs/FunLuca_phytohormones.xlsx"
+  "databases/FunLuca_phytohormones.xlsx"
 
 ##! blast-vibrioferrin
 vibrioferrin_db:
-  "/gpfs/data/fs71863/lucaz5/_DBs/custom_fasta/Protein_sequences_for_vibrioferrin_pathways_annotation_01mai20.fasta"
+  "databases/custom_fasta/Protein_sequences_for_vibrioferrin_pathways_annotation_01mai20.fasta"
 
 ##! blast-DMSP
 DMSP_db:
-  "/gpfs/data/fs71863/lucaz5/_DBs/custom_fasta/Protein_sequences_for_DMSP_pathways_annotation_21dec20.fasta"
+  "databases/custom_fasta/Protein_sequences_for_DMSP_pathways_annotation_21dec20.fasta"
 
 ##! dbCAN
 dbCAN_db:
-  "/gpfs/data/fs71863/lucaz5/_DBs/CAZy"
+  "databases/CAZy"
 CAZy_subs:
-  "CF_codes/_databases/selected_CAZy.tsv"
+  "databases/selected_CAZy.tsv"
 
 ##! master table
 KM_long_names:
@@ -64,7 +64,7 @@ KM_long_names:
 
 ##! Heat-maps
 taxa_col:
-  "/gpfs/data/fs71863/lucaz5/_DBs/MY_taxa_cols.tsv"
+  "databases/MY_taxa_cols.tsv"
 min_trait_occur: # min number of genomes a trait should be bresent to be included in the heat-map
   3
 min_tpm:

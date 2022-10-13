@@ -1,0 +1,11 @@
+Building DAG of jobs...
+InputFunctionException in line 555 of /home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/rules/FunLuca.smk:
+Error:
+  KeyError: False
+Wildcards:
+  genome=GCF_001578515.1_ASM157851v1_genomic
+Traceback:
+  File "/home/lucaz/VSC5_data/CF_standalone_WF/FunLuca/workflow/rules/FunLuca.smk", line 561, in <lambda>
+  File "/home/lucaz/mambaforge/envs/snakemake/lib/python3.10/site-packages/pandas/core/series.py", line 959, in __getitem__
+  File "/home/lucaz/mambaforge/envs/snakemake/lib/python3.10/site-packages/pandas/core/series.py", line 1070, in _get_value
+  File "/home/lucaz/mambaforge/envs/snakemake/lib/python3.10/site-packages/pandas/core/indexes/base.py", line 3623, in get_loc

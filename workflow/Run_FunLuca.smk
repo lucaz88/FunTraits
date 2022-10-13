@@ -69,6 +69,7 @@ rule all:
 
 #! load pipelines
 include: "rules/FunLuca.smk"
+include: "rules/genome_analysis.smk"
 include: "rules/get_DBs.smk"
 
 

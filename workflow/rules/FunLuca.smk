@@ -87,7 +87,7 @@ rule run_dbCAN:
         i_cazy = directory(os.path.join(output_dir, "dbCAN_CAZy", "{genome}")),
         i_no_seq_gff = temp(os.path.join(output_dir, "dbCAN_CAZy", "{genome}", "no_seq.gff")),
     params:
-        core = config["ann_CORE"],
+        core = config["nCORE"],
     conda:
         "../envs/dbCAN.yaml",
     log:
@@ -137,7 +137,7 @@ rule blast_DMSP:
     output:
         i_phytohormone = os.path.join(output_dir, "blast_DMSP", "{genome}.tsv"),
     params:
-        core = config["ann_CORE"],
+        core = config["nCORE"],
         ref_db = config["DMSP_db"],
     conda:
         "../envs/blast.yaml",
@@ -169,7 +169,7 @@ rule makeblastdb_DMSP:
     output:
         ref_token = config["DMSP_db"]+"_token",
     params:
-        core = config["ann_CORE"],
+        core = config["nCORE"],
     conda:
         "../envs/blast.yaml",
     log:
@@ -213,7 +213,7 @@ rule blast_vibrioferrin:
     output:
         i_vibrioferrin = os.path.join(output_dir, "blast_vibrioferrin", "{genome}.tsv"),
     params:
-        core = config["ann_CORE"],
+        core = config["nCORE"],
         ref_db = config["vibrioferrin_db"],
     conda:
         "../envs/blast.yaml",
@@ -245,7 +245,7 @@ rule makeblastdb_vibrioferrin:
     output:
         ref_token = config["vibrioferrin_db"]+"_token",
     params:
-        core = config["ann_CORE"],
+        core = config["nCORE"],
     conda:
         "../envs/blast.yaml",
     log:
@@ -290,7 +290,7 @@ rule blast_phytohormones:
     output:
         i_phytohormone = os.path.join(output_dir, "blast_phytohormones", "{genome}.tsv"),
     params:
-        core = config["ann_CORE"],
+        core = config["nCORE"],
         ref_db = config["phytohormones_db"],
     conda:
         "../envs/blast.yaml",
@@ -322,7 +322,7 @@ rule makeblastdb_phytohormones:
     output:
         ref_token = config["phytohormones_db"]+"_token",
     params:
-        core = config["ann_CORE"],
+        core = config["nCORE"],
     conda:
         "../envs/blast.yaml",
     log:
@@ -423,7 +423,7 @@ rule run_antismash:
     output:
         i_KO = directory(os.path.join(output_dir, "antiSMASH", "{genome}")),
     params:
-        core = config["ann_CORE"], 
+        core = config["nCORE"], 
     conda:
         "../envs/antiSMASH.yaml",
     log:
@@ -481,7 +481,7 @@ rule KM_reconstruction_wrapper:
         KEGG_KM_tab = os.path.join(output_dir, "KEGG_KM_tab.tsv"),
     params:
         KM_str = config["KM_str"],
-        ncore = config["ann_CORE"], 
+        ncore = config["nCORE"], 
     conda:
         "../envs/R_data_parsing.yaml"
     script:
@@ -516,7 +516,7 @@ rule run_kofamscan:
         i_KO = os.path.join(output_dir, "KEGG_KO", "{genome}_ko.txt"),
         i_tmp = directory(os.path.join(output_dir, "KEGG_KO", "{genome}")),
     params:
-        core = 100 #config["ann_CORE"], 
+        core = 100 #config["nCORE"], 
     conda:
         "../envs/kofamscan.yaml",
     log:
@@ -557,12 +557,12 @@ rule run_prokka:
     Run prokka annotation on fasta files.
     """
     input:
-        i_gnm = lambda wildcards: os.path.join(gnm_dir, 
-                                  genome_tab.file[genome_names == wildcards.genome].squeeze()),
+        i_gnm = lambda wildcards: os.path.join(genome_dir, 
+                                  genome_tab.file[genome_tab.file_noext == wildcards.genome].squeeze()),
     output:
         i_gnm_dir = directory(os.path.join(output_dir, "prokka", "{genome}")),
     params:
-        core = config["ann_CORE"], 
+        core = config["nCORE"], 
     conda:
         "../envs/prokka.yaml",
     log:
