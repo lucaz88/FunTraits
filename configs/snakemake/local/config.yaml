@@ -1,5 +1,5 @@
 jobs:
-  3
+  2
 cores: # is overruled by Snakemake config file
   2
 
