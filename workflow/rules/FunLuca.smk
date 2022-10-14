@@ -29,7 +29,7 @@ rule make_master_table:
     conda:
         "../envs/R_data_parsing.yaml"
     script:
-        "scripts/make_master_table.R"
+        "../scripts/make_master_table.R"
  
 
 
@@ -52,7 +52,7 @@ rule parse_dbCAN:
     conda:
         "../envs/R_data_parsing.yaml"
     script:
-        "scripts/parse_dbCAN.R"
+        "../scripts/parse_dbCAN.R"
 
 
 rule run_dbCAN:
@@ -70,7 +70,7 @@ rule run_dbCAN:
     conda:
         "../envs/dbCAN.yaml",
     log:
-        command = "_logs/run_dbCAN_{genome}.command",
+        command = "0_logs/run_dbCAN_{genome}.command",
     shell:
         '''
         cmd="
@@ -103,7 +103,7 @@ rule parse_DMSP:
     conda:
         "../envs/R_data_parsing.yaml"
     script:
-        "scripts/parse_DMSP.R"
+        "../scripts/parse_DMSP.R"
         
         
 rule blast_DMSP:
@@ -121,7 +121,7 @@ rule blast_DMSP:
     conda:
         "../envs/blast.yaml",
     log:
-        command = "_logs/blast_DMSP_{genome}.command",
+        command = "0_logs/blast_DMSP_{genome}.command",
     shell:
         '''
         cmd="
@@ -152,7 +152,7 @@ rule makeblastdb_DMSP:
     conda:
         "../envs/blast.yaml",
     log:
-        command = "_logs/makeblastdb_DMSP.command",
+        command = "0_logs/makeblastdb_DMSP.command",
     shell:
         '''
         cmd="
@@ -179,7 +179,7 @@ rule parse_vibrioferrin:
     conda:
         "../envs/R_data_parsing.yaml"
     script:
-        "scripts/parse_vibrioferrin.R"
+        "../scripts/parse_vibrioferrin.R"
         
         
 rule blast_vibrioferrin:
@@ -197,7 +197,7 @@ rule blast_vibrioferrin:
     conda:
         "../envs/blast.yaml",
     log:
-        command = "_logs/blast_vibrioferrin_{genome}.command",
+        command = "0_logs/blast_vibrioferrin_{genome}.command",
     shell:
         '''
         cmd="
@@ -228,7 +228,7 @@ rule makeblastdb_vibrioferrin:
     conda:
         "../envs/blast.yaml",
     log:
-        command = "_logs/makeblastdb_vibrioferrin.command",
+        command = "0_logs/makeblastdb_vibrioferrin.command",
     shell:
         '''
         cmd="
@@ -256,7 +256,7 @@ rule parse_phytohormones:
     conda:
         "../envs/R_data_parsing.yaml"
     script:
-        "scripts/parse_phytohormones.R"
+        "../scripts/parse_phytohormones.R"
         
         
 rule blast_phytohormones:
@@ -274,7 +274,7 @@ rule blast_phytohormones:
     conda:
         "../envs/blast.yaml",
     log:
-        command = "_logs/blast_phytohormones_{genome}.command",
+        command = "0_logs/blast_phytohormones_{genome}.command",
     shell:
         '''
         cmd="
@@ -305,7 +305,7 @@ rule makeblastdb_phytohormones:
     conda:
         "../envs/blast.yaml",
     log:
-        command = "_logs/makeblastdb_phytohormones.command",
+        command = "0_logs/makeblastdb_phytohormones.command",
     shell:
         '''
         cmd="
@@ -335,7 +335,7 @@ rule parse_gblast:
     conda:
         "../envs/R_data_parsing.yaml"
     script:
-        "scripts/parse_gblast.R"
+        "../scripts/parse_gblast.R"
 
 
 rule run_gblast:
@@ -351,7 +351,7 @@ rule run_gblast:
     # conda:
     #     "../envs/BioVx.yaml",
     log:
-        command = "_logs/run_gblast_{genome}.command",
+        command = "0_logs/run_gblast_{genome}.command",
     shell:
         '''
         cmd="
@@ -389,7 +389,7 @@ rule parse_antismash:
     conda:
         "../envs/R_data_parsing.yaml"
     script:
-        "scripts/parse_antismash.R"
+        "../scripts/parse_antismash.R"
 
 
 rule run_antismash:
@@ -406,7 +406,7 @@ rule run_antismash:
     conda:
         "../envs/antiSMASH.yaml",
     log:
-        command = "_logs/run_antismash_{genome}.command",
+        command = "0_logs/run_antismash_{genome}.command",
     shell:
         '''
         cmd="
@@ -447,7 +447,7 @@ rule parse_manual_fromKOs:
     conda:
         "../envs/R_data_parsing.yaml"
     script:
-        "scripts/parse_manual_fromKOs.R"
+        "../scripts/parse_manual_fromKOs.R"
 
 
 rule KM_reconstruction_wrapper:
@@ -464,7 +464,7 @@ rule KM_reconstruction_wrapper:
     conda:
         "../envs/R_data_parsing.yaml"
     script:
-        "scripts/KM_reconstruction_wrapper.R"
+        "../scripts/KM_reconstruction_wrapper.R"
 
 
 rule parse_kofamscan:
@@ -480,7 +480,7 @@ rule parse_kofamscan:
     conda:
         "../envs/R_data_parsing.yaml"
     script:
-        "scripts/parse_kofamscan.R"
+        "../scripts/parse_kofamscan.R"
 
 
 rule run_kofamscan:
@@ -499,7 +499,7 @@ rule run_kofamscan:
     conda:
         "../envs/kofamscan.yaml",
     log:
-        command = "_logs/run_kofamscan_{genome}.command",
+        command = "0_logs/run_kofamscan_{genome}.command",
     shell:
         '''
         cmd="
@@ -528,7 +528,7 @@ rule parse_prokka:
     conda:
         "../envs/R_data_parsing.yaml"
     script:
-        "scripts/parse_prokka.R"
+        "../scripts/parse_prokka.R"
         
         
 rule run_prokka:
@@ -545,7 +545,7 @@ rule run_prokka:
     conda:
         "../envs/prokka.yaml",
     log:
-        command = "_logs/run_prokka_{genome}.command",
+        command = "0_logs/run_prokka_{genome}.command",
     shell:
         '''
         cmd="

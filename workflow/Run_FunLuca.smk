@@ -69,9 +69,9 @@ run_plots = [
 #! declare outputs
 rule all:
     input:
-        run_basic,
+        # run_basic,
         run_FunLuca,
-        run_plots
+        # run_plots
 
 
 

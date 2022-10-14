@@ -73,7 +73,7 @@ if os.path.exists(os.path.join(config["kegg_db"], "profiles")) and os.path.exist
             kegg_profiles = os.path.join(config["kegg_db"], "profiles"),
             kegg_ko_list = os.path.join(config["kegg_db"], "ko_list"),
         log:
-            command = "_logs/touch_kofamscan_DB.command",
+            command = "0_logs/touch_kofamscan_DB.command",
         shell:
             '''
             cmd="
@@ -91,7 +91,7 @@ else:
             kegg_profiles = os.path.join(config["kegg_db"], "profiles"),
             kegg_ko_list = os.path.join(config["kegg_db"], "ko_list"),
         log:
-            command = "_logs/get_kofamscan_DB.command",
+            command = "0_logs/get_kofamscan_DB.command",
         shell:
             '''
             cmd="
