@@ -70,7 +70,7 @@ rule run_dbCAN:
     conda:
         "../envs/dbCAN.yaml",
     log:
-        command = "0_logs/run_dbCAN_{genome}.command",
+        command = "_logs/run_dbCAN_{genome}.command",
     shell:
         '''
         cmd="
@@ -121,7 +121,7 @@ rule blast_DMSP:
     conda:
         "../envs/blast.yaml",
     log:
-        command = "0_logs/blast_DMSP_{genome}.command",
+        command = "_logs/blast_DMSP_{genome}.command",
     shell:
         '''
         cmd="
@@ -152,7 +152,7 @@ rule makeblastdb_DMSP:
     conda:
         "../envs/blast.yaml",
     log:
-        command = "0_logs/makeblastdb_DMSP.command",
+        command = "_logs/makeblastdb_DMSP.command",
     shell:
         '''
         cmd="
@@ -197,7 +197,7 @@ rule blast_vibrioferrin:
     conda:
         "../envs/blast.yaml",
     log:
-        command = "0_logs/blast_vibrioferrin_{genome}.command",
+        command = "_logs/blast_vibrioferrin_{genome}.command",
     shell:
         '''
         cmd="
@@ -228,7 +228,7 @@ rule makeblastdb_vibrioferrin:
     conda:
         "../envs/blast.yaml",
     log:
-        command = "0_logs/makeblastdb_vibrioferrin.command",
+        command = "_logs/makeblastdb_vibrioferrin.command",
     shell:
         '''
         cmd="
@@ -274,7 +274,7 @@ rule blast_phytohormones:
     conda:
         "../envs/blast.yaml",
     log:
-        command = "0_logs/blast_phytohormones_{genome}.command",
+        command = "_logs/blast_phytohormones_{genome}.command",
     shell:
         '''
         cmd="
@@ -305,7 +305,7 @@ rule makeblastdb_phytohormones:
     conda:
         "../envs/blast.yaml",
     log:
-        command = "0_logs/makeblastdb_phytohormones.command",
+        command = "_logs/makeblastdb_phytohormones.command",
     shell:
         '''
         cmd="
@@ -351,7 +351,7 @@ rule run_gblast:
     # conda:
     #     "../envs/BioVx.yaml",
     log:
-        command = "0_logs/run_gblast_{genome}.command",
+        command = "_logs/run_gblast_{genome}.command",
     shell:
         '''
         cmd="
@@ -406,7 +406,7 @@ rule run_antismash:
     conda:
         "../envs/antiSMASH.yaml",
     log:
-        command = "0_logs/run_antismash_{genome}.command",
+        command = "_logs/run_antismash_{genome}.command",
     shell:
         '''
         cmd="
@@ -499,7 +499,7 @@ rule run_kofamscan:
     conda:
         "../envs/kofamscan.yaml",
     log:
-        command = "0_logs/run_kofamscan_{genome}.command",
+        command = "_logs/run_kofamscan_{genome}.command",
     shell:
         '''
         cmd="
@@ -545,7 +545,7 @@ rule run_prokka:
     conda:
         "../envs/prokka.yaml",
     log:
-        command = "0_logs/run_prokka_{genome}.command",
+        command = "_logs/run_prokka_{genome}.command",
     shell:
         '''
         cmd="

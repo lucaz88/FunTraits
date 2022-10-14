@@ -14,9 +14,10 @@ Thanks to the Snakemake architecture, it offers an easy scalability from local s
 
 The **generated outputs** are:
 
-* `results/MASTER_table.tsv` containing the comprehensive summary of all annotations. It's based on a GFF format in which each row represent a gene of a genomes in the input directory, while the columns holds the information of gene location and functional annotations.
-* Genome stats about completness (using CheckM) and taxonomy (using GTDB-Tk) in the folders `results/checkm` and `results/gtdbtk`
-* An interactive HTML heatmap `hm_MASTERtraits_jacc.html` representing the annotated traits across genomes
+* `_results/MASTER_table.tsv` containing the comprehensive summary of all annotations. It's based on a GFF format in which each row represent a gene of a genomes in the input directory, while the columns holds the information of gene location and functional annotations.
+* Genome stats about completness (using CheckM) and taxonomy (using GTDB-Tk) in the folders `_results/checkm` and `_results/gtdbtk`
+* An interactive HTML heatmap `_plot/hm_MASTERtraits_jacc.html` representing the annotated traits across genomes
+* Logs of all executed rules in the directory `_logs`
 
 ### TODO list
 
