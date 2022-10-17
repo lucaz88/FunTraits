@@ -1,7 +1,7 @@
 jobs:
-  2
+  5
 cores: # is overruled by Snakemake config file
-  2
+  20
 
 
 use-conda:

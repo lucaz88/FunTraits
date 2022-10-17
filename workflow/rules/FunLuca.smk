@@ -354,6 +354,7 @@ rule run_gblast:
         command = "_logs/run_gblast_{genome}.command",
     shell:
         '''
+        HOME=$(pwd)"/databases/tcdb"
         cmd="
         gblast3.py
         -i {input.i_gnm_dir}/*.faa
