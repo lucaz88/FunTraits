@@ -73,7 +73,7 @@ if os.path.exists(os.path.join(config["kegg_db"], "profiles")) and os.path.exist
             kegg_profiles = os.path.join(config["kegg_db"], "profiles"),
             kegg_ko_list = os.path.join(config["kegg_db"], "ko_list"),
         log:
-            command = "0_logs/touch_kofamscan_DB.command",
+            command = "_logs/touch_kofamscan_DB.command",
         shell:
             '''
             cmd="
@@ -91,7 +91,7 @@ else:
             kegg_profiles = os.path.join(config["kegg_db"], "profiles"),
             kegg_ko_list = os.path.join(config["kegg_db"], "ko_list"),
         log:
-            command = "0_logs/get_kofamscan_DB.command",
+            command = "_logs/get_kofamscan_DB.command",
         shell:
             '''
             cmd="
@@ -100,7 +100,7 @@ else:
             tar zxf {output.kegg_db}/profiles.tar.gz -C {output.kegg_db};
             rm {output.kegg_db}/profiles.tar.gz;
             wget ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz -O {output.kegg_db}/ko_list.gz;
-            gzip -d {output.kegg_db}/ko_list.gz
+            gzip -d {output.kegg_db}/ko_list.gz;
             touch {output.kegg_profiles} {output.kegg_ko_list};
             ";
             echo $cmd >> {log.command}; 
