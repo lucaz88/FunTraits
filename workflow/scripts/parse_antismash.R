@@ -5,8 +5,10 @@ parse_antismash = function(html_folder, gff_folder,
   suppressMessages(suppressWarnings(library(rtracklayer)))
   
   #! set variables
-  sm_list = list.files(html_folder, pattern = "index.html$", full.names = T, recursive = T)
-  gff_list = list.files(gff_folder, pattern = ".gff$", full.names = T, recursive = T)
+  sm_list = sapply(html_folder, function(i)
+    list.files(i, pattern = "index.html$", full.names = T, recursive = T))
+  gff_list = sapply(gff_folder, function(i)
+    list.files(i, pattern = ".gff$", full.names = T, recursive = T))
   gff_list = gff_list[match(sapply(strsplit(sm_list, "/"), function(i) rev(i)[2]), 
                             sapply(strsplit(gff_list, "/"), function(i) rev(i)[2]))]
   

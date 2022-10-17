@@ -4,7 +4,8 @@ parse_prokka = function(gff_folder,
   suppressMessages(suppressWarnings(library(rtracklayer)))
   
   #! set variables
-  gff_list = list.files(gff_folder, pattern = ".gff$", full.names = T, recursive = T)
+  gff_list = sapply(gff_folder, function(i)
+    list.files(i, pattern = ".gff$", full.names = T, recursive = T))
   
   #! parsing
   gff_tab = lapply(gff_list, readGFF)

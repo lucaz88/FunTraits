@@ -2,6 +2,7 @@ parse_kofamscan = function(ko_files,
                            KEGG_KO_tab) {
   #! load packages
   suppressMessages(suppressWarnings(library(webchem)))
+  suppressMessages(suppressWarnings(library(tidyverse)))
   
   #! import data
   KO_ann1 = lapply(ko_files, function(i) read.delim(i, h=T, quote="", fill=F, check.names = F))

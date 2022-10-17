@@ -5,12 +5,10 @@ parse_gblast = function(transp_folder,
   suppressMessages(suppressWarnings(library(stringr)))
   suppressMessages(suppressWarnings(library(webchem)))
   
-  #! set variables
-  transp_list = list.files(transp_folder, pattern = "results.tsv$", full.names = T, recursive = T)
-  
   #! import raw data
-  transp_ann1 = lapply(transp_list, function(i) read.delim(i, h=T, sep = "\t"))
-  names(transp_ann1) = sapply(strsplit(transp_list, "/"), function(i) rev(i)[2])
+  transp_ann1 = lapply(transp_folder, function(i) 
+    read.delim(file.path(i, "results.tsv"), h=T, sep = "\t"))
+  names(transp_ann1) = sapply(strsplit(transp_folder, "/"), function(i) rev(i)[1])
   transp_ann1 = do.call(rbind, transp_ann1)
   transp_ann1 = cbind(filename=gsub("\\.[0-9]+$", "", row.names(transp_ann1)), transp_ann1)
   colnames(transp_ann1)[colnames(transp_ann1) == "X.Query_id"] = "locus_tag"

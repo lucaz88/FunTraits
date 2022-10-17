@@ -4,12 +4,10 @@ parse_dbCAN = function(CAZy_folder,
   #! load packages
   # library(rvest)
   
-  #! set variables
-  CAZy_list = list.files(CAZy_folder, pattern = "overview.txt$", full.names = T, recursive = T)
-  
   #! import raw data
-  CAZy_ann1 = lapply(CAZy_list, function(i) read.delim(i, h=T, sep = "\t"))
-  names(CAZy_ann1) = sapply(strsplit(CAZy_list, "/"), function(i) rev(i)[2])
+  CAZy_ann1 = lapply(CAZy_folder, function(i) 
+    read.delim(file.path(i, "overview.txt"), h=T, sep = "\t"))
+  names(CAZy_ann1) = sapply(strsplit(CAZy_folder, "/"), function(i) rev(i)[1])
   CAZy_ann1 = do.call(rbind, CAZy_ann1)
   CAZy_ann1 = cbind(filename=gsub("\\.[0-9]+$", "", row.names(CAZy_ann1)), CAZy_ann1)
   colnames(CAZy_ann1)[colnames(CAZy_ann1) == "Gene.ID"] = "locus_tag"
