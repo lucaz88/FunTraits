@@ -67,42 +67,24 @@ rule update_antismash_DB:
         '''
 
 
-if os.path.exists(os.path.join(config["kegg_db"], "profiles")) and os.path.exists(os.path.join(config["kegg_db"], "ko_list")): 
-    rule touch_kofamscan_DB:
-        output:
-            kegg_profiles = os.path.join(config["kegg_db"], "profiles"),
-            kegg_ko_list = os.path.join(config["kegg_db"], "ko_list"),
-        log:
-            command = "_logs/touch_kofamscan_DB.command",
-        shell:
-            '''
-            cmd="
-            touch {output.kegg_profiles} {output.kegg_ko_list};
-            ";
-            echo $cmd >> {log.command};
-            eval $cmd
-            '''
-else:
-    print("Kofamscan DB is missing or it's not in the provided directory")
-    print("Fetching a new DB from ftp://ftp.genome.jp/pub/db/kofam/")
-    rule get_kofamscan_DB:
-        output:
-            kegg_db = directory(config["kegg_db"]),
-            kegg_profiles = directory(os.path.join(config["kegg_db"], "profiles")),
-            kegg_ko_list = os.path.join(config["kegg_db"], "ko_list"),
-        log:
-            command = "_logs/get_kofamscan_DB.command",
-        shell:
-            '''
-            cmd="
-            mkdir -p {output.kegg_db};
-            wget ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz -O {output.kegg_db}/profiles.tar.gz;
-            tar zxf {output.kegg_db}/profiles.tar.gz -C {output.kegg_db};
-            rm {output.kegg_db}/profiles.tar.gz;
-            wget ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz -O {output.kegg_db}/ko_list.gz;
-            gzip -d {output.kegg_db}/ko_list.gz;
-            touch {output.kegg_profiles} {output.kegg_ko_list};
-            ";
-            echo $cmd >> {log.command}; 
-            eval $cmd
-            '''
+rule get_kofamscan_DB:
+    output:
+        kegg_db = directory(config["kegg_db"]),
+        kegg_profiles = directory(os.path.join(config["kegg_db"], "profiles")),
+        kegg_ko_list = os.path.join(config["kegg_db"], "ko_list"),
+    log:
+        command = "_logs/get_kofamscan_DB.command",
+    shell:
+        '''
+        cmd="
+        mkdir -p {output.kegg_db};
+        wget ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz -O {output.kegg_db}/profiles.tar.gz;
+        tar zxf {output.kegg_db}/profiles.tar.gz -C {output.kegg_db};
+        rm {output.kegg_db}/profiles.tar.gz;
+        wget ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz -O {output.kegg_db}/ko_list.gz;
+        gzip -d {output.kegg_db}/ko_list.gz;
+        touch {output.kegg_profiles} {output.kegg_ko_list};
+        ";
+        echo $cmd >> {log.command}; 
+        eval $cmd
+        '''
