@@ -460,6 +460,7 @@ rule KM_reconstruction_wrapper:
     output:
         KEGG_KM_tab = os.path.join(output_dir, "KEGG_KM_tab.tsv"),
     params:
+        KM_reco_script = "../scripts/KM_reconstruction.R",
         KM_str = config["KM_str"],
         ncore = config["nCORE"], 
     conda:
