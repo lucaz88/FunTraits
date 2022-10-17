@@ -1,10 +1,10 @@
 #! wrapper function
 KM_reconstruction_wrapper = function(KEGG_KO_tab, 
                                      KEGG_KM_tab,
-                                     KM_str, ncore) {
+                                     KM_reco_script, KM_str, ncore) {
   #! load packages
   suppressMessages(suppressWarnings(library(tidyverse)))
-  source("CF_codes/workflow/scripts/KM_reconstruction.R")
+  source(KM_reco_script)
   
   #! check if KEGG module structure file exist, otherwise fetch it
   if (file.exists(KM_str)) {
@@ -48,6 +48,7 @@ KM_reconstruction_wrapper = function(KEGG_KO_tab,
 
 KM_reconstruction_wrapper(KEGG_KO_tab = snakemake@input[["KEGG_KO_tab"]],
                           KEGG_KM_tab = snakemake@output[["KEGG_KM_tab"]],
+                          KM_reco_script = snakemake@params[["KM_reco_script"]],
                           KM_str = snakemake@params[["KM_str"]],
                           ncore = snakemake@params[["ncore"]]
 )
