@@ -88,7 +88,7 @@ else:
     rule get_kofamscan_DB:
         output:
             kegg_db = directory(config["kegg_db"]),
-            kegg_profiles = os.path.join(config["kegg_db"], "profiles"),
+            kegg_profiles = directory(os.path.join(config["kegg_db"], "profiles")),
             kegg_ko_list = os.path.join(config["kegg_db"], "ko_list"),
         log:
             command = "_logs/get_kofamscan_DB.command",
