@@ -47,7 +47,7 @@ Then fetch the code repository from GitHub:
 
 #### Prepare input files
 
-You can either test the WF with the two provided genomes in the folder `input_genomes`, or you can delete them and place your desired genomes in that folder.
+You can either try the WF with the test genomes provided in the folder `input_genomes`, or you can delete them and place your desired genomes in that folder.
 
 Genomes are expected to be placed in that specific folder (i.e. `input_genomes`), have the extension `.fna` and not be compressed. However you can change these parameters by editing the variables `genome_dir`, `genome_ext` and `sfds` in the file `workflow/Run_FunLuca.smk`.
 

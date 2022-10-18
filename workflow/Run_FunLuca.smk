@@ -42,7 +42,7 @@ plot_dir = "_plots"
 
 
 
-#! genome analysis
+#! compute outputs
 genome_tab = find_inputs(genome_dir, genome_ext, 
                       double_ext=False)
 genome_names = col2list(genome_tab, "file_noext")
@@ -50,15 +50,7 @@ run_basic = [
     os.path.join(output_dir, 'checkm'),
     os.path.join(output_dir, 'gtdbtk'),
 ]
-
-
-
-#! genome annotation
 run_FunLuca = os.path.join(output_dir, "MASTER_table.tsv")
-
-
-
-#! plots
 run_plots = [
     os.path.join(plot_dir, 'hm_MASTERtraits_jacc.html'),
     # os.path.join(plot_dir, 'hm_MASTERtraits_mapped.html'),
