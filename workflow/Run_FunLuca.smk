@@ -25,6 +25,7 @@ configfile: "configs/FunLuca_config.yaml"
 
 #! import python modules
 import os
+import re
 from scripts.myPy_FUN import find_inputs
 from scripts.myPy_FUN import col2list
 from scripts.myPy_FUN import comb_lists

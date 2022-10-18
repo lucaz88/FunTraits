@@ -287,6 +287,7 @@ rule run_checkm:
     output:
         checkm_dir = directory(os.path.join(output_dir, 'checkm')),
     params:
+        ext = re.sub("^\\.", "", genome_ext)
         ncore = 64, # issue with pplacer (it never ends when using more CPUs)
         # ncore = config["nCORE"],
     conda:
@@ -303,7 +304,7 @@ rule run_checkm:
         checkm
         lineage_wf
         -t {params.ncore}
-        -x fa
+        -x {params.ext}
         {input.gnm_dir}
         {output.checkm_dir}
         ;
