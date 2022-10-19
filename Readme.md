@@ -69,3 +69,5 @@ and then run it (`-n` flag execute a dry run that just output the WF rules witho
 If you wanna check the rule scheme that would be executed by Snakemake and save it as PDF run
 
 `snakemake -s workflow/Run_FunLuca.smk --forceall --rulegraph | dot -Tpdf > dag.pdf`
+
+!!! the first execution will take quite some time as it has to fetches the DBs of KEGG and GTDB-Tk
