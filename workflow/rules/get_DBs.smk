@@ -17,7 +17,7 @@ rule get_tcdb:
     Get tcdb to run tools such as gblast.
     """
     input:
-        test_faa_dir = "databases"
+        test_faa = "databases/test.faa"
     output:
         TCDB_dir = directory(config["TCDB_dir"]),
         fake_out = temp(directory("databases/fake_out")),
@@ -28,10 +28,9 @@ rule get_tcdb:
     shell:
         '''
         HOME=$(pwd)"/"{output.TCDB_dir}"
-        mkdir $HOME
         cmd="
         gblast3.py
-        -i {input.test_faa_dir}/.*faa
+        -i {input.test_faa}
         -o {output.fake_out};
         ";
         echo $cmd >> {log.command};
