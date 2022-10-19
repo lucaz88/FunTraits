@@ -12,6 +12,33 @@ TODO:
 """
 
 
+rule get_tcdb:
+    """
+    Get tcdb to run tools such as gblast.
+    """
+    input:
+        test_faa = "databases/test.faa"
+    output:
+        TCDB_dir = directory(config["TCDB_dir"]),
+        fake_out = temp(directory("databases/fake_out")),
+    container:
+        "docker://lucaz88/biovx"
+    log:
+        command = "_logs/get_tcdb.command",
+    shell:
+        '''
+        HOME=$(pwd)"/"{output.TCDB_dir}";
+        mkdir $HOME;
+        cmd="
+        gblast3.py
+        -i {input.test_faa}
+        -o {output.fake_out};
+        ";
+        echo $cmd >> {log.command};
+        eval $cmd
+        '''
+
+
 rule update_GTDBTk_db:
     output:
         GTDBTk_dir = directory(config["GTDBTk_dir"]),
