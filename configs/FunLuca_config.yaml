@@ -7,7 +7,7 @@ nCORE:
 GTDBTk_dir:
   "databases/GTDBTk"
 GTDBTk_db:
-  "databases/GTDBTk/GTDBTk_token"
+  "databases/GTDBTk/GTDBTk.token"
 TCDB_dir:
   "databases/tcdb"
 

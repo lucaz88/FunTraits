@@ -70,4 +70,4 @@ If you wanna check the rule scheme that would be executed by Snakemake and save 
 
 `snakemake -s workflow/Run_FunLuca.smk --forceall --rulegraph | dot -Tpdf > dag.pdf`
 
-!!! the first execution will take quite some time as it has to fetches the DBs of KEGG and GTDB-Tk
+!!! the first execution will take quite some time as it has to fetches the DBs of KEGG, CAZy and (especially) GTDB-Tk
