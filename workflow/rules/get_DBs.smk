@@ -27,8 +27,8 @@ rule get_tcdb:
         command = "_logs/get_tcdb.command",
     shell:
         '''
-        HOME=$(pwd)"/"{output.TCDB_dir}";
-        mkdir $HOME;
+        HOME=$(pwd)"/"{output.TCDB_dir}"
+        mkdir $HOME
         cmd="
         gblast3.py
         -i {input.test_faa}

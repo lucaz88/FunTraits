@@ -46,8 +46,6 @@ TODO:
 #         aggl_mt = "complete",
 #     conda:
 #         "../envs/R_plots.yaml"
-#     benchmark:
-#         "0_benchmarks/merge_plot_coverm.txt"
 #     script:
 #         "../workflow/scripts/merge&plot_CoverM.R"
 
@@ -84,9 +82,7 @@ TODO:
 #         conda:
 #             "../envs/mapping_reads.yaml"
 #         log:
-#             command = "0_logs/mapping_MAGs_minimap2_{sample}.command"
-#         benchmark:
-#             "0_benchmarks/mapping_MAGs_minimap2_{sample}.txt"
+#             command = "_logs/mapping_MAGs_minimap2_{sample}.command"
 #         shell:
 #             '''
 #             cmd="
@@ -152,9 +148,7 @@ TODO:
 #         conda:
 #             "../envs/mapping_reads.yaml"
 #         log:
-#             command = "0_logs/mapping_MAGs_minimap2_{sample}.command"
-#         benchmark:
-#              "0_benchmarks/mapping_MAGs_minimap2_{sample}.txt"
+#             command = "_logs/mapping_MAGs_minimap2_{sample}.command"
 #         shell:
 #             '''
 #             cmd="
@@ -205,9 +199,7 @@ TODO:
 #     conda:
 #         "../envs/mapping_reads.yaml"
 #     log:
-#         command = "0_logs/make_mags_db.command"
-#     benchmark:
-#         "0_benchmarks/make_mags_db.txt"
+#         command = "_logs/make_mags_db.command"
 #     shell:
 #         '''
 #         if [[ {params.is_long} = true ]]
@@ -255,9 +247,7 @@ rule run_gtdbtk:
         # partition = "mem_0384",
         # qos = "mem_0384",
     log:
-        command = "0_logs/run_gtdbtk.command"
-    benchmark:
-        "0_benchmarks/run_gtdbtk.txt"
+        command = "_logs/run_gtdbtk.command"
     shell:
         '''
         cmd="
@@ -295,9 +285,7 @@ rule run_checkm:
     # resources:
     #     time = "03:59:00",
     log:
-        command = "0_logs/run_checkm.command"
-    benchmark:
-        "0_benchmarks/run_checkm.txt"
+        command = "_logs/run_checkm.command"
     shell:
         '''
         cmd="
