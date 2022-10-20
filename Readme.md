@@ -74,4 +74,4 @@ If you wanna check the rule scheme that would be executed by Snakemake and save 
 
 `snakemake -s workflow/Run_FunLuca.smk --forceall --rulegraph | dot -Tpdf > dag.pdf`
 
-!!! the first execution will take quite some time as it has to fetches the DBs (~2 Gb) of KEGG (~2 Gb), CAZy and GTDB-Tk (~70 Gb)
+!!! the first execution will take quite some time as it has to fetches the DBs (~2 Gb) of KEGG (~2 Gb), CAZy and GTDB-Tk (~66 Gb)

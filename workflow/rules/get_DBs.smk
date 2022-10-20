@@ -19,7 +19,7 @@ rule get_tcdb:
     input:
         test_faa = "databases/test.faa"
     output:
-        TCDB_dir = directory(config["TCDB_dir"]),
+        TCDB_path = directory(config["TCDB_path"]),
         fake_out = temp(directory("databases/fake_out")),
     container:
         "docker://lucaz88/biovx"
@@ -27,8 +27,8 @@ rule get_tcdb:
         command = "_logs/get_tcdb.command",
     shell:
         '''
-        HOME=$(pwd)"/"{output.TCDB_dir};
-        mkdir -p {output.TCDB_dir};
+        HOME=$(pwd)"/"{output.TCDB_path};
+        mkdir -p {output.TCDB_path};
         cmd="
         gblast3.py
         -i {input.test_faa}
@@ -39,16 +39,16 @@ rule get_tcdb:
         '''
 
 
-rule update_GTDBTk_db:
+rule update_GTDBTk_path:
     output:
-        GTDBTk_dir = directory(config["GTDBTk_dir"]),
+        GTDBTk_path = directory(config["GTDBTk_path"]),
     # conda:
     #     "../envs/GTDB_Tk.yaml",
     shell:
         '''
         cmd="
-        test -d {output.GTDBTk_dir} || mkdir {output.GTDBTk_dir};
-        cd {output.GTDBTk_dir};
+        test -d {output.GTDBTk_path} || mkdir {output.GTDBTk_path};
+        cd {output.GTDBTk_path};
         wget https://data.ace.uq.edu.au/public/gtdb/data/releases/latest/auxillary_files/gtdbtk_v2_data.tar.gz;
         tar xvzf gtdbtk_v2_data.tar.gz;
         ";

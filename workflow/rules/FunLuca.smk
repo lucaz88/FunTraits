@@ -343,7 +343,7 @@ rule run_gblast:
     Run gblast script of the BioV suit to annotate transporters using TCdb.
     """
     input:
-        TCDB_dir = config["TCDB_dir"],
+        TCDB_path = config["TCDB_path"],
         i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
     output:
         i_transp = directory(os.path.join(output_dir, "BioV_transp", "{genome}")),
@@ -353,7 +353,7 @@ rule run_gblast:
         command = "_logs/run_gblast_{genome}.command",
     shell:
         '''
-        HOME=$(pwd)"/"{input.TCDB_dir};
+        HOME=$(pwd)"/"{input.TCDB_path};
         cmd="
         gblast3.py
         -i {input.i_gnm_dir}/*.faa

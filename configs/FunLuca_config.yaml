@@ -4,9 +4,9 @@ nCORE:
 
 
 #! database:
-GTDBTk_dir:
+GTDBTk_path:
   "databases/GTDBTk"
-TCDB_dir:
+TCDB_path:
   "databases/tcdb"
 
 

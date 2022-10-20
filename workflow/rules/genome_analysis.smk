@@ -233,7 +233,7 @@ rule run_gtdbtk:
     """
     input:
         gnm_dir = genome_dir,
-        GTDBTk_dir = config["GTDBTk_dir"],
+        GTDBTk_path = config["GTDBTk_path"],
     output:
         gtdbtk_dir = directory(os.path.join(output_dir, 'gtdbtk')),
     params:
@@ -250,9 +250,8 @@ rule run_gtdbtk:
         command = "_logs/run_gtdbtk.command"
     shell:
         '''
+        export GTDBTK_DATA_PATH={input.GTDBTk_path}
         cmd="
-        if [[ -f $CONDA_PREFIX/share/gtdbtk-2.0.0/db/.empty ]]; then rm $CONDA_PREFIX/share/gtdbtk-2.0.0/db/.empty; fi
-        ;
         gtdbtk
         classify_wf
         --genome_dir {input.gnm_dir}
@@ -264,8 +263,6 @@ rule run_gtdbtk:
         echo $cmd >> {log.command};
         eval $cmd
         '''
-        # if [[ -f $CONDA_PREFIX/share/gtdbtk-2.0.0/db/.empty ]]; then rm $CONDA_PREFIX/share/gtdbtk-2.0.0/db/.empty; 
-        # ln -sf {params.GTDBTk_db}/release207/*  $CONDA_PREFIX/share/gtdbtk-2.0.0/db/; fi;
    
 
 rule run_checkm:
