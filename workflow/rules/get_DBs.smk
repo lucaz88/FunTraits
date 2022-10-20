@@ -42,7 +42,6 @@ rule get_tcdb:
 rule update_GTDBTk_db:
     output:
         GTDBTk_dir = directory(config["GTDBTk_dir"]),
-        GTDBTk_token = config["GTDBTk_db"],
     # conda:
     #     "../envs/GTDB_Tk.yaml",
     shell:
@@ -52,7 +51,6 @@ rule update_GTDBTk_db:
         cd {output.GTDBTk_dir};
         wget https://data.ace.uq.edu.au/public/gtdb/data/releases/latest/auxillary_files/gtdbtk_v2_data.tar.gz;
         tar xvzf gtdbtk_v2_data.tar.gz;
-        touch {output.GTDBTk_token};
         ";
         eval $cmd
         '''

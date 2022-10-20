@@ -6,8 +6,6 @@ nCORE:
 #! database:
 GTDBTk_dir:
   "databases/GTDBTk"
-GTDBTk_db:
-  "databases/GTDBTk/GTDBTk_token"
 TCDB_dir:
   "databases/tcdb"
 

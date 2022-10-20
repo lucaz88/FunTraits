@@ -233,11 +233,10 @@ rule run_gtdbtk:
     """
     input:
         gnm_dir = genome_dir,
-        GTDBTk_token = config["GTDBTk_db"],
+        GTDBTk_dir = config["GTDBTk_dir"],
     output:
         gtdbtk_dir = directory(os.path.join(output_dir, 'gtdbtk')),
     params:
-        # GTDBTk_db = config["GTDBTk_db"],
         ncore = config["nCORE"],
         pplacer_cpus = 64, # issue with pplacer (it never ends when using more CPUs)
     conda:
