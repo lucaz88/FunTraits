@@ -237,6 +237,7 @@ rule run_gtdbtk:
     output:
         gtdbtk_dir = directory(os.path.join(output_dir, 'gtdbtk')),
     params:
+        genome_ext = genome_ext,
         ncore = config["nCORE"],
         pplacer_cpus = 64, # issue with pplacer (it never ends when using more CPUs)
     conda:
@@ -256,7 +257,7 @@ rule run_gtdbtk:
         classify_wf
         --genome_dir {input.gnm_dir}
         --out_dir {output.gtdbtk_dir}
-        --extension fa
+        --extension {params.genome_ext}
         --cpus {params.ncore}
         --pplacer_cpus {params.pplacer_cpus}
         ";

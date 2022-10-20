@@ -27,6 +27,10 @@ The **generated outputs** are:
 
 #### Set up the environment
 
+In order to run smoothly it requeires a system with at least 55Gb of RAM as the WF runs GTDB-Tk to assign genomes' taxonomy.
+
+#### Set up the environment
+
 You need to have Snakemake, Mamba (recomended, not essential) and Singularity installed properly in your system. You can usually achieve this by running the following commands but refer the official documentations for any issue or doubts (<https://snakemake.readthedocs.io/en/stable/getting_started/installation.html> and <https://docs.sylabs.io/guides/3.0/user-guide/installation.html#installation>). In the terminal type:
 
     wget https://repo.anaconda.com/miniconda/Miniconda3-py38_4.12.0-Linux-x86_64.sh
