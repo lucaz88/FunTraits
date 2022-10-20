@@ -43,8 +43,8 @@ rule update_GTDBTk_db:
     output:
         GTDBTk_dir = directory(config["GTDBTk_dir"]),
         GTDBTk_token = config["GTDBTk_db"],
-    conda:
-        "../envs/GTDB_Tk.yaml",
+    # conda:
+    #     "../envs/GTDB_Tk.yaml",
     shell:
         '''
         cmd="
