@@ -5,5 +5,3 @@ channels:
   - conda-forge
 dependencies:
   - gtdbtk=2.1.0
-variables:
-  GTDBTK_DATA_PATH: databases/GTDBTk/release207_v2 #! has to match DB path created with 'get_DBs_config.yaml'

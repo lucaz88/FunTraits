@@ -21,6 +21,7 @@ The **generated outputs** are:
 
 ### TODO list
 
+* remove conda-prefix and singularity-prefix from config files
 * add feauture for mapping genomes to fastq files and make plots (code ready, just need implementation)
 
 ## How to run
