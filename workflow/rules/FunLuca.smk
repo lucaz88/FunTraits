@@ -354,8 +354,6 @@ rule run_gblast:
     shell:
         '''
         HOME=$(pwd)"/"{input.TCDB_path};
-        eval "$(micromamba shell hook --shell=bash)";
-        micromamba activate;
         cmd="
         gblast3.py
         -i {input.i_gnm_dir}/*.faa
