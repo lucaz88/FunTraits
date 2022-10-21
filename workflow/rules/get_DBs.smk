@@ -28,7 +28,7 @@ rule get_tcdb:
     shell:
         '''
         HOME=$(pwd)"/"{output.TCDB_path};
-        micromamba activate;
+        micromamba shell init --shell=bash --prefix=~/micromamba;
         mkdir -p {output.TCDB_path};
         cmd="
         gblast3.py
