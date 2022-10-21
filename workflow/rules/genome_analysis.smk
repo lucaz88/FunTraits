@@ -250,7 +250,7 @@ rule run_gtdbtk:
         command = "_logs/run_gtdbtk.command"
     shell:
         '''
-        export GTDBTK_DATA_PATH={input.GTDBTk_path}
+        export GTDBTK_DATA_PATH=$(pwd)"/"{input.GTDBTk_path}
         cmd="
         gtdbtk
         classify_wf
