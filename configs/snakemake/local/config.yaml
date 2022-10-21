@@ -15,7 +15,7 @@ conda-prefix: # avoid duplication of envs but it's impossible to simultaneously 
 use-singularity:
   True
 singularity-prefix:
-  "~/VSC5_data/snakemake_envs/singularity"
+  "databases/singularity"
 
 
 printshellcmds: 
