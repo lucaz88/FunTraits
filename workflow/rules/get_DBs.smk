@@ -28,7 +28,6 @@ rule get_tcdb:
     shell:
         '''
         HOME=$(pwd)"/"{output.TCDB_path};
-        eval "$(micromamba shell hook --shell=bash)";
         micromamba activate;
         mkdir -p {output.TCDB_path};
         cmd="
