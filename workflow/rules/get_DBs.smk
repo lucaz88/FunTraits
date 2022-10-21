@@ -27,7 +27,9 @@ rule get_tcdb:
         command = "_logs/get_tcdb.command",
     shell:
         '''
-        HOME=$(pwd)"/"{output.TCDB_path};
+        HOME=$(pwd)"/"{input.TCDB_path};
+        eval "$(micromamba shell hook --shell=bash)";
+        micromamba activate;
         mkdir -p {output.TCDB_path};
         cmd="
         gblast3.py
