@@ -19,7 +19,7 @@ rule get_tcdb:
     input:
         test_faa = "databases/test.faa"
     output:
-        TCDB_path = directory(config["TCDB_path"]),
+        TCDB_db = directory(config["TCDB_db"]),
         fake_out = temp(directory("databases/fake_out")),
     container:
         "docker://lucaz88/biovx"
@@ -27,8 +27,8 @@ rule get_tcdb:
         command = "_logs/get_tcdb.command",
     shell:
         '''
-        HOME=$(pwd)"/"{output.TCDB_path};
-        mkdir -p {output.TCDB_path};
+        HOME=$(pwd)"/"{output.TCDB_db};
+        mkdir -p {output.TCDB_db};
         cmd="
         gblast3.py
         -i {input.test_faa}
