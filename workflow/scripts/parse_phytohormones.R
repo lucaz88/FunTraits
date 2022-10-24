@@ -36,6 +36,12 @@ parse_phytohormones <- function(phyhorm_files, suppl_tab,
     return(i2)
   }))
   
+  
+  #! handle exception of no hits passing the filtering step 
+  if (is.null(phyhorm_ann3)) {
+    phyhorm_ann3 <- phyhorm_ann2
+  }
+  
   #! check for any path in genomes using the annotated KOs
   phyhorm_list <- as.data.frame(read_xlsx(suppl_tab, col_names = T, sheet = 1, skip = 3)) 
   phyhorm_list <- phyhorm_list[!is.na(phyhorm_list$`Interaction traits`), ] # remove extra lines in Excel table
@@ -93,7 +99,7 @@ parse_phytohormones <- function(phyhorm_files, suppl_tab,
     phyhorm_ann7 <- merge(phyhorm_ann3, ann_mask, by = c("filename", "gene_ann"), all.x=F)
     phyhorm_ann7 <- phyhorm_ann7[, c(colnames(phyhorm_ann3), "trait")]
   } else {
-    phyhorm_ann7 <- cbind(phyhorm_ann3[0, ], trait=c())
+    phyhorm_ann7 <- cbind(phyhorm_ann3[0, ], trait=character(0))
   }
   
   #! save output
