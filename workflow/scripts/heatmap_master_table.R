@@ -1,16 +1,15 @@
 # #___ for testing
-# setwd("~/VSC_data/lucaz/metags/B03_M0001_Chicken_gut_microbiome")
-# MASTER_table <- "4_MAG_annotation/MASTER_table.tsv"
-# gtdbtk_dir <- "3_MAG_analysis/gtdbtk"
+# setwd("~/VSC5_data/test/FunLuca/")
+# MASTER_table <- "_results/MASTER_table.tsv"
+# gtdbtk_dir <- "_results/gtdbtk"
+# outfile <- "_plot/hm_MASTERtraits_jacc.html"
 # ann_modules <- c("prokka","KEGG_KO","KEGG_KM","KEGG_manual","antiSMASH","BioV_transp","blast_phytohormones","blast_vibrioferrin","blast_DMSP","dbCAN_CAZy")
-# # ann_modules <- ann_modules[-c(7,8)]
 # min_trait_occur <- 3
 # dist_mt <- "jaccard"
 # aggl_mt <- "ward.D2"
-# taxa_col <- "~/VSC_data/lucaz/_DBs/MY_taxa_cols.tsv"
-# outfile <- "4_MAG_annotation/hm_MASTERtraits_jacc.html"
+# taxa_col <- "databases/MY_taxa_cols.tsv"
 # 
-# heatmap_master_table(MASTER_table, gtdbtk_dir, ann_modules, dist_mt, aggl_mt, outfile)
+# heatmap_master_table(MASTER_table, gtdbtk_dir, outfile, ann_modules, min_trait_occur, dist_mt, aggl_mt, taxa_col)
 # #___ for testing
 
 
