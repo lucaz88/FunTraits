@@ -20,15 +20,15 @@ rule heatmap_master_table:
         outfile = os.path.join(plot_dir, 'hm_MASTERtraits_jacc.html'),
     params:
         ann_modules = config["ann_modules"],
-        taxa_col = config["taxa_col"],
-        # smpl_col = config["smpl_col"],
         min_trait_occur = config["min_trait_occur"],
         dist_mt = config["dist_mt"],
         aggl_mt = config["aggl_mt"],
+        taxa_col = config["taxa_col"],
+        # smpl_col = config["smpl_col"],
     conda:
         "../envs/R_plots.yaml"
     script:
-        "../workflow/scripts/plot_FunLuca_hm.R"
+        "../workflow/scripts/heatmap_master_table.R"
 
 
 # rule plot_FunLuca_MAGs:

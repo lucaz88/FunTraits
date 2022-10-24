@@ -10,14 +10,14 @@
 # taxa_col <- "~/VSC_data/lucaz/_DBs/MY_taxa_cols.tsv"
 # outfile <- "4_MAG_annotation/hm_MASTERtraits_jacc.html"
 # 
-# plot_FunLuca_hm(MASTER_table, gtdbtk_dir, ann_modules, dist_mt, aggl_mt, outfile)
+# heatmap_master_table(MASTER_table, gtdbtk_dir, ann_modules, dist_mt, aggl_mt, outfile)
 # #___ for testing
 
 
 
-plot_FunLuca_hm <- function(MASTER_table, gtdbtk_dir, 
-                            outfile,
-                            ann_modules, min_trait_occur, dist_mt, aggl_mt, taxa_col=NULL) {
+heatmap_master_table <- function(MASTER_table, gtdbtk_dir, 
+                                 outfile,
+                                 ann_modules, min_trait_occur, dist_mt, aggl_mt, taxa_col=NULL) {
   #! libraries
   suppressMessages(suppressWarnings(library(tidyverse)))
   suppressMessages(suppressWarnings(library(vegan)))
@@ -40,9 +40,10 @@ plot_FunLuca_hm <- function(MASTER_table, gtdbtk_dir,
   gtdb_summary <- read.delim(file.path(gtdbtk_dir, "gtdbtk.bac120.summary.tsv"))
   
   
-  #! filter
-  hm_matrix <- hm_matrix[, apply(hm_matrix, 2, function(i) sum(i > 0)) >= min_trait_occur] # a trait must be present in at least 3 genomes
-  
+  #! filter traits by occurrence
+  if(nrow(hm_matrix) > 2) { # there should be at least more than 2 genomes in the dataset
+    hm_matrix <- hm_matrix[, apply(hm_matrix, 2, function(i) sum(i > 0)) >= min_trait_occur]
+  }
   
   #! tweaks for testing
   hm_matrix[hm_matrix > 1] <- 1
@@ -88,11 +89,19 @@ plot_FunLuca_hm <- function(MASTER_table, gtdbtk_dir,
   over_text <- apply(over_text, 2, function(i) {
     paste0(i, gtdb_summary$classification[match(rownames(hm_matrix), gtdb_summary$user_genome)])
   })
+  if (nrow(hm_matrix) == 1) {
+    over_text <- t(over_text)
+  }
   
   
   #! calculate dendrograms
-  row_hc <- hclust(vegdist(hm_matrix, dist_mt, binary = T), method = aggl_mt)
-  col_hc <- hclust(vegdist(t(hm_matrix), dist_mt, binary = T), method = aggl_mt)
+  if(nrow(hm_matrix) > 2) { # there should be at least more than 2 genomes in the dataset
+    row_hc <- hclust(vegdist(hm_matrix, dist_mt, binary = T), method = aggl_mt)
+    col_hc <- hclust(vegdist(t(hm_matrix), dist_mt, binary = T), method = aggl_mt)
+  } else {
+    row_hc <- FALSE
+    col_hc <- FALSE
+  }
   
   
   #! plotting & saving
@@ -117,12 +126,12 @@ plot_FunLuca_hm <- function(MASTER_table, gtdbtk_dir,
 
 
 
-plot_FunLuca_hm(MASTER_table = snakemake@input[["MASTER_table"]],
-                gtdbtk_dir = snakemake@input[["gtdbtk_dir"]],
-                outfile = snakemake@output[["outfile"]],
-                ann_modules = snakemake@params[["ann_modules"]],
-                min_trait_occur = snakemake@params[["min_trait_occur"]],
-                dist_mt = snakemake@params[["dist_mt"]],
-                aggl_mt = snakemake@params[["aggl_mt"]],
-                taxa_col = snakemake@params[["taxa_col"]]
+heatmap_master_table(MASTER_table = snakemake@input[["MASTER_table"]],
+                     gtdbtk_dir = snakemake@input[["gtdbtk_dir"]],
+                     outfile = snakemake@output[["outfile"]],
+                     ann_modules = snakemake@params[["ann_modules"]],
+                     min_trait_occur = snakemake@params[["min_trait_occur"]],
+                     dist_mt = snakemake@params[["dist_mt"]],
+                     aggl_mt = snakemake@params[["aggl_mt"]],
+                     taxa_col = snakemake@params[["taxa_col"]]
 )

@@ -69,13 +69,13 @@ KM_long_names:
   TRUE
 
 ##! Heat-maps
-taxa_col:
-  "databases/MY_taxa_cols.tsv"
 min_trait_occur: # min number of genomes a trait should be bresent to be included in the heat-map
   3
-min_tpm:
-  5
 dist_mt:
   "jaccard"
 aggl_mt:
   "ward.D2"
+taxa_col:
+  "databases/MY_taxa_cols.tsv"
+# min_tpm:
+#   5
