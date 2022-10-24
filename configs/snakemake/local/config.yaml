@@ -9,7 +9,7 @@ use-conda:
 conda-frontend:
   mamba
 conda-prefix: # avoid duplication of envs but it's impossible to simultaneously fetch 2 envs from 2 different snakemake projects
-  "~/VSC5_data/snakemake_envs/conda" 
+  "tools/conda" 
 
 
 use-singularity:

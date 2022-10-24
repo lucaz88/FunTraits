@@ -14,14 +14,14 @@ Thanks to the Snakemake architecture, it offers an easy scalability from local s
 
 The **generated outputs** are:
 
-* `_results/MASTER_table.tsv` containing the comprehensive summary of all annotations. It's based on a GFF format in which each row represent a gene of a genomes in the input directory, while the columns holds the information of gene location and functional annotations.
+* `_results/MASTER_table.tsv` containing the comprehensive summary of all annotations. It's based on a GFF format in which each row represent a gene of a genomes in the input folder, while the columns holds the information of gene location and functional annotations.
 * Genome stats about completness (using CheckM) and taxonomy (using GTDB-Tk) in the folders `_results/checkm` and `_results/gtdbtk`
 * An interactive HTML heatmap `_plot/hm_MASTERtraits_jacc.html` representing the annotated traits across genomes
-* Logs of all executed rules in the directory `_logs`
+* Logs of all executed rules in the folder `_logs`
+* All conda environments and docker used in the WF will be stored in the folder `_tools`
 
 ### TODO list
 
-* remove conda-prefix and singularity-prefix from config files
 * add feauture for mapping genomes to fastq files and make plots (code ready, just need implementation)
 
 ## How to run
