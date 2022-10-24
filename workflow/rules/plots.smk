@@ -28,7 +28,7 @@ rule heatmap_master_table:
     conda:
         "../envs/R_plots.yaml"
     script:
-        "../workflow/scripts/heatmap_master_table.R"
+        "../scripts/heatmap_master_table.R"
 
 
 # rule plot_FunLuca_MAGs:
