@@ -39,7 +39,7 @@ rule get_tcdb:
         '''
 
 
-rule update_GTDBTk_path:
+rule get_GTDBTk_DB:
     output:
         GTDBTk_path = directory(config["GTDBTk_path"]),
     # conda:
@@ -51,10 +51,10 @@ rule update_GTDBTk_path:
         cd {output.GTDBTk_path};
         wget https://data.ace.uq.edu.au/public/gtdb/data/releases/latest/auxillary_files/gtdbtk_v2_data.tar.gz;
         tar xvzf gtdbtk_v2_data.tar.gz;
-        rm xvzf gtdbtk_v2_data.tar.gz;
         ";
         eval $cmd
         '''
+        # rm xvzf gtdbtk_v2_data.tar.gz;
 
         
 rule update_dbCAN_DB:
@@ -78,7 +78,7 @@ rule update_dbCAN_DB:
         '''
 
 
-rule update_antismash_DB:
+rule get_antismash_DB:
     output:
         fake_out = config["antim_db"],
     conda:
