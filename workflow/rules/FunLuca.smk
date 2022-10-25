@@ -347,6 +347,9 @@ rule run_gblast:
         i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
     output:
         i_transp = directory(os.path.join(output_dir, "BioV_transp", "{genome}")),
+    params:
+        tmp_img = os.path.join(output_dir, "BioV_transp", "{genome}", "img"),
+        tmp_xml = os.path.join(output_dir, "BioV_transp", "{genome}", "xml"),
     container:
         "docker://lucaz88/biovx"
     log:
@@ -357,7 +360,11 @@ rule run_gblast:
         cmd="
         gblast3.py
         -i {input.i_gnm_dir}/*.faa
-        -o {output.i_transp};
+        -o {output.i_transp}
+        ;
+        rm -rf {params.tmp_img}
+        ;
+        rm -rf {params.tmp_xml}
         ";
         echo $cmd >> {log.command};
         eval $cmd
