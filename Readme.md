@@ -18,7 +18,7 @@ The **generated outputs** are:
 * Genome stats about completness (using CheckM) and taxonomy (using GTDB-Tk) in the folders `_results/checkm` and `_results/gtdbtk`
 * An interactive HTML heatmap `_plot/hm_MASTERtraits_jacc.html` representing the annotated traits across genomes
 * Logs of all executed rules in the folder `_logs`
-* All conda environments and docker used in the WF will be stored in the folder `_tools`
+* All conda environments and docker used in the WF will be stored in the folder `_tools`, while the fetched databases will be stored in the folder`databases`
 
 ### TODO list
 
