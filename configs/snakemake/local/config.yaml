@@ -9,13 +9,13 @@ use-conda:
 conda-frontend:
   mamba
 conda-prefix: # avoid duplication of envs but it's impossible to simultaneously fetch 2 envs from 2 different snakemake projects
-  "tools/conda" 
+  "_tools/conda" 
 
 
 use-singularity:
   True
 singularity-prefix:
-  "tools/singularity"
+  "_tools/singularity"
 
 
 printshellcmds: 

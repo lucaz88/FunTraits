@@ -9,12 +9,12 @@
 # aggl_mt <- "ward.D2"
 # taxa_col <- "databases/MY_taxa_cols.tsv"
 # 
-# heatmap_master_table(MASTER_table, gtdbtk_dir, outfile, ann_modules, min_trait_occur, dist_mt, aggl_mt, taxa_col)
+# plot_FunLuca_hm(MASTER_table, gtdbtk_dir, outfile, ann_modules, min_trait_occur, dist_mt, aggl_mt, taxa_col)
 # #___ for testing
 
 
 
-heatmap_master_table <- function(MASTER_table, gtdbtk_dir, 
+plot_FunLuca_hm <- function(MASTER_table, gtdbtk_dir, 
                                  outfile,
                                  ann_modules, min_trait_occur, dist_mt, aggl_mt, taxa_col=NULL) {
   #! libraries
@@ -125,7 +125,7 @@ heatmap_master_table <- function(MASTER_table, gtdbtk_dir,
 
 
 
-heatmap_master_table(MASTER_table = snakemake@input[["MASTER_table"]],
+plot_FunLuca_hm(MASTER_table = snakemake@input[["MASTER_table"]],
                      gtdbtk_dir = snakemake@input[["gtdbtk_dir"]],
                      outfile = snakemake@output[["outfile"]],
                      ann_modules = snakemake@params[["ann_modules"]],

@@ -47,7 +47,7 @@ rule update_GTDBTk_path:
     shell:
         '''
         cmd="
-        test -d {output.GTDBTk_path} || mkdir {output.GTDBTk_path};
+        mkdir {output.GTDBTk_path};
         cd {output.GTDBTk_path};
         wget https://data.ace.uq.edu.au/public/gtdb/data/releases/latest/auxillary_files/gtdbtk_v2_data.tar.gz;
         tar xvzf gtdbtk_v2_data.tar.gz;
@@ -65,7 +65,7 @@ rule update_dbCAN_DB:
     shell:
         '''
         cmd="
-        test -d {output.dbCAN_dir} || mkdir {output.dbCAN_dir};
+        mkdir {output.dbCAN_dir};
         cd {output.dbCAN_dir};
         wget http://bcb.unl.edu/dbCAN2/download/CAZyDB.09242021.fa && diamond makedb --in CAZyDB.09242021.fa -d CAZy;
         wget https://bcb.unl.edu/dbCAN2/download/Databases/V10/dbCAN-HMMdb-V10.txt && mv dbCAN-HMMdb-V10.txt dbCAN.txt && hmmpress dbCAN.txt;
