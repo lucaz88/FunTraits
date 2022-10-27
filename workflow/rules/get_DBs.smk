@@ -44,6 +44,8 @@ rule get_GTDBTk_DB:
         GTDBTk_path = directory(config["GTDBTk_path"]),
     # conda:
     #     "../envs/GTDB_Tk.yaml",
+    log:
+        command = "_logs/get_GTDBTk_DB.command",
     shell:
         '''
         cmd="
@@ -51,10 +53,10 @@ rule get_GTDBTk_DB:
         cd {output.GTDBTk_path};
         wget https://data.ace.uq.edu.au/public/gtdb/data/releases/latest/auxillary_files/gtdbtk_v2_data.tar.gz;
         tar xvzf gtdbtk_v2_data.tar.gz;
+        rm xvzf gtdbtk_v2_data.tar.gz;
         ";
         eval $cmd
         '''
-        # rm xvzf gtdbtk_v2_data.tar.gz;
 
         
 rule update_dbCAN_DB:
@@ -62,6 +64,8 @@ rule update_dbCAN_DB:
         dbCAN_dir = directory(config["dbCAN_db"]),
     conda:
         "../envs/dbCAN.yaml",
+    log:
+        command = "_logs/update_dbCAN_DB.command",
     shell:
         '''
         cmd="
@@ -83,6 +87,8 @@ rule get_antismash_DB:
         fake_out = config["antim_db"],
     conda:
         "../envs/antiSMASH.yaml",
+    log:
+        command = "_logs/get_antismash_DB.command",
     shell:
         '''
         cmd="

@@ -5,7 +5,7 @@ nCORE:
 
 #! database:
 GTDBTk_path:
-  "databases/GTDBTk/release207_v2"
+  "databases/GTDBTk"
 TCDB_db:
   "databases/tcdb"
 

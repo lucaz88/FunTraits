@@ -233,7 +233,7 @@ rule run_gtdbtk:
     """
     input:
         gnm_dir = genome_dir,
-        GTDBTk_path = config["GTDBTk_path"],
+        GTDBTk_path = glob.glob(os.path.join(config["GTDBTk_path"], "*release*")),
     output:
         gtdbtk_dir = directory(os.path.join(output_dir, 'gtdbtk')),
     params:
