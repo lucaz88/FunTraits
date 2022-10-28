@@ -53,7 +53,6 @@ rule get_GTDBTk_DB:
         cd {output.GTDBTk_path};
         wget https://data.ace.uq.edu.au/public/gtdb/data/releases/latest/auxillary_files/gtdbtk_v2_data.tar.gz;
         tar xvzf gtdbtk_v2_data.tar.gz;
-        rm xvzf gtdbtk_v2_data.tar.gz;
         ";
         eval $cmd
         '''

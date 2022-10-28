@@ -233,7 +233,7 @@ rule run_gtdbtk:
     """
     input:
         gnm_dir = genome_dir,
-        GTDBTk_path = glob.glob(os.path.join(config["GTDBTk_path"], "*release*")),
+        GTDBTk_path = directory(config["GTDBTk_path"]),
     output:
         gtdbtk_dir = directory(os.path.join(output_dir, 'gtdbtk')),
     params:
@@ -250,7 +250,9 @@ rule run_gtdbtk:
         command = "_logs/run_gtdbtk.command"
     shell:
         '''
-        export GTDBTK_DATA_PATH=$(pwd)"/"{input.GTDBTk_path}
+        GTDBTk_path=$(pwd)"/"{input.GTDBTk_path};
+        GTDBTk_path=$(find $GTDBTk_path -type d -name "release*");
+        export GTDBTK_DATA_PATH=$GTDBTk_path;
         cmd="
         gtdbtk
         classify_wf
