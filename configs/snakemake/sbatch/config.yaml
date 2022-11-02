@@ -1,8 +1,3 @@
-# cluster: 
-#   "sbatch --nodes 1 
-#   --partition zen3_0512 --qos p71863_0512 
-#   --time=00:59:00 
-#   --mail-user=luca.zoccarato@boku.ac.at --mail-type=FAIL,END"
 cluster: 
   sbatch
     --nodes={resources.nodes}
@@ -11,16 +6,13 @@ cluster:
     --qos={resources.qos}
     --job-name={rule}-{wildcards}
     --parsable # Required to pass job IDs to scancel
-    # --mem={resources.mem_mb}
 
 
 default-resources:
   - nodes=1
-  - partition="zen3_0512"
-  - qos="p71863_0512"
-  - time="00:59:00" #!!! job below 1h get allocated almost in RT
-  # - mem_mb=6*input.size_mb
-  # - disk_mb=max(2*input.size_mb, 10000)
+  - partition="zen3_0512" #! adjust to your cluster's environment
+  - qos="p71863_0512" #! adjust to your cluster's environment
+  - time="00:59:00"
 
 
 jobs:
@@ -36,13 +28,13 @@ use-conda:
 conda-frontend:
   mamba
 conda-prefix: # avoid duplication of envs but it's impossible to simultaneously fetch 2 envs from 2 different snakemake projects
-  "~/VSC5_data/snakemake_envs/conda" 
+  "_tools/conda" 
 
 
 use-singularity:
   True
 singularity-prefix:
-  "~/VSC5_data/snakemake_envs/singularity"
+  "_tools/singularity"
 
 
 printshellcmds: 
@@ -51,5 +43,3 @@ keep-going:
   True
 rerun-incomplete: 
   True
-# keep-incomplete: # good for debugging
-#   True
