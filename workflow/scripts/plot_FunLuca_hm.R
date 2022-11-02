@@ -28,7 +28,7 @@ plot_FunLuca_hm <- function(MASTER_table, gtdbtk_dir,
     if (min_trait_occur < nrow(hm_matrix)) { 
       hm_matrix <- hm_matrix[, apply(hm_matrix, 2, function(i) sum(i > 0)) >= min_trait_occur]
     } else {
-      cat("\n\nValues provided for trait filtering is ≥ of the number of genonomes.\n\n")
+      cat("\n\nValues provided for trait filtering is ≥ of the number of genonomes so no trait filter will be performed.\n\n")
     }
   } else {
     cat("\n\nThere are only 2 genomes in the dataset so no trait filter will be performed.\n\n")
