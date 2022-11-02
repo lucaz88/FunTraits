@@ -80,5 +80,5 @@ include: "rules/get_DBs.smk"
 #! useful bash commands
 # git https://github.com/lucaz88/FunLuca.git
 # conda activate snakemake
-# snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/local -pn
+# snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/local -p
 # snakemake -s workflow/Run_FunLuca.smk --forceall --rulegraph | dot -Tpdf > dag.pdf

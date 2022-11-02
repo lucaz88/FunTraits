@@ -1,19 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
  
-
-## dummy vars for testing
-from xmlrpc.client import boolean
-
-
-file_names = ["smpl_1", "smpl_2"]
-config = {}
-config["parsing_modules"] = ["demux","ccs"]
-config["assembly_long_mods"] = ["canu","flye"]
-config["binning_mods"] = ["maxbin2","metabat2"]
-config["ann_modules"] = ["prokka","KEGG_KM","BioV_transp"]
-## ---
-
       
 ## find inputs & save path and filenames as table
 def find_inputs(dir, filename_pattern, double_ext=False, uniq_PE=False):

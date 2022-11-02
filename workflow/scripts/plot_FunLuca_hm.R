@@ -1,19 +1,3 @@
-# #___ for testing
-# setwd("~/VSC5_data/test/FunLuca/")
-# MASTER_table <- "_results/MASTER_table.tsv"
-# gtdbtk_dir <- "_results/gtdbtk"
-# outfile <- "_plot/hm_MASTERtraits_jacc.html"
-# ann_modules <- c("prokka","KEGG_KO","KEGG_KM","KEGG_manual","antiSMASH","BioV_transp","blast_phytohormones","blast_vibrioferrin","blast_DMSP","dbCAN_CAZy")
-# min_trait_occur <- 3
-# dist_mt <- "jaccard"
-# aggl_mt <- "ward.D2"
-# taxa_col <- "databases/MY_taxa_cols.tsv"
-# 
-# plot_FunLuca_hm(MASTER_table, gtdbtk_dir, outfile, ann_modules, min_trait_occur, dist_mt, aggl_mt, taxa_col)
-# #___ for testing
-
-
-
 plot_FunLuca_hm <- function(MASTER_table, gtdbtk_dir, 
                                  outfile,
                                  ann_modules, min_trait_occur, dist_mt, aggl_mt, taxa_col=NULL) {
@@ -40,8 +24,14 @@ plot_FunLuca_hm <- function(MASTER_table, gtdbtk_dir,
   
   
   #! filter traits by occurrence
-  if(nrow(hm_matrix) > 2) { # there should be at least more than 2 genomes in the dataset
-    hm_matrix <- hm_matrix[, apply(hm_matrix, 2, function(i) sum(i > 0)) >= min_trait_occur]
+  if (nrow(hm_matrix) > 2) { 
+    if (min_trait_occur < nrow(hm_matrix)) { 
+      hm_matrix <- hm_matrix[, apply(hm_matrix, 2, function(i) sum(i > 0)) >= min_trait_occur]
+    } else {
+      cat("\n\nValues provided for trait filtering is ≥ of the number of genonomes.\n\n")
+    }
+  } else {
+    cat("\n\nThere are only 2 genomes in the dataset so no trait filter will be performed.\n\n")
   }
   
   #! tweaks for testing

@@ -1,6 +1,6 @@
 # Snakemake workflow for genetic trait annotation
 
-This repo contains a Snakmeake implementation of the annotation pipeline published in  <https://www.nature.com/articles/s42003-022-03184-4> . It allows for and easy implementation and deployment of several **annotation tools**:
+This repo contains a Snakmeake implementation of the annotation pipeline published in  <https://www.nature.com/articles/s42003-022-03184-4> . The workflow (WF) will execute several **annotation tools**:
 
 * prokka
 * KEGG Orthology (including insight analyses of phytohormones production, DHPS and taurine utilization)
@@ -10,7 +10,7 @@ This repo contains a Snakmeake implementation of the annotation pipeline publish
 * DMSP degradation pathways (blastp against UniProt)
 * dbCAN (for automated carbohydrate-active enzyme annotation)
 
-Thanks to the Snakemake architecture, it offers an easy scalability from local server to cluster computer. It's also easily expandable by new annotation tools.
+Thanks to the Snakemake architecture, the WF offers an easy scalability from local server to cluster computer. It can also be expanded to include new annotation tools.
 
 The **generated outputs** are:
 
@@ -29,6 +29,7 @@ The **generated outputs** are:
 #### Set up the environment
 
 In order to run smoothly it requeires a system with at least 55Gb of RAM as the WF runs GTDB-Tk to assign genomes' taxonomy.
+Nodes/server used to run the WF needs to have FTP access (required to fetch annotation databases).
 
 #### Set up the environment
 
