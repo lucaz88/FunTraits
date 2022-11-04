@@ -64,16 +64,21 @@ Maybe something you wanna set are the values `jobs` and `cores`, which control t
 
 #### Run the WF
 
-In the terminal, activate Snakemake (if you haven't done already) with `conda activate snakemake` and prompt the following command to check that everything works properly:
+In the terminal, activate Snakemake and run the WF by selecting the relevant config file:
 
+* to execute on a local server
+    conda activate snakemake
+    snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/local -p
+
+* to execute on a cluster (!remember to adjust the config file to your cluster environment)
+    conda activate snakemake
+    snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/sbatch -p
+
+If you just wanna check which rules will be exectuted in the WF without actually run it, you can perform a dry run by setting the `-n` flag, e.g.:
 `snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/local -pn`
 
-and then run it (`-n` flag execute a dry run that just output the WF rules without running them)
-
-`snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/local -p`
-
-If you wanna check the rule scheme that would be executed by Snakemake and save it as PDF run
+If you wanna check the rule scheme of the WF and save it as PDF run
 
 `snakemake -s workflow/Run_FunLuca.smk --forceall --rulegraph | dot -Tpdf > dag.pdf`
 
-!!! the first execution will take quite some time as it has to fetches the DBs (~2 Gb) of KEGG (~2 Gb), CAZy and GTDB-Tk (~66 Gb)
+!!! Be aware that the first execution could take quite some time as snakemake will need to install all the required conda envromnents and singularity, as well as to fetche the DBs (especially KEGG ~2 Gb and GTDB-Tk ~66 Gb).
