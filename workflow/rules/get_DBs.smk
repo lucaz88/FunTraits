@@ -27,8 +27,8 @@ rule get_tcdb:
         command = "_logs/get_tcdb.command",
     shell:
         '''
-        HOME=$(pwd)"/"{output.TCDB_db};
         mkdir -p {output.TCDB_db};
+        HOME=$(pwd)"/"{output.TCDB_db};
         cmd="
         gblast3.py
         -i {input.test_faa}
@@ -49,7 +49,7 @@ rule get_GTDBTk_DB:
     shell:
         '''
         cmd="
-        mkdir {output.GTDBTk_path};
+        mkdir -p {output.GTDBTk_path};
         cd {output.GTDBTk_path};
         wget https://data.ace.uq.edu.au/public/gtdb/data/releases/latest/auxillary_files/gtdbtk_v2_data.tar.gz;
         tar xvzf gtdbtk_v2_data.tar.gz;
@@ -69,7 +69,7 @@ rule update_dbCAN_DB:
     shell:
         '''
         cmd="
-        mkdir {output.dbCAN_dir};
+        mkdir -p {output.dbCAN_dir};
         cd {output.dbCAN_dir};
         wget http://bcb.unl.edu/dbCAN2/download/CAZyDB.09242021.fa && diamond makedb --in CAZyDB.09242021.fa -d CAZy;
         wget https://bcb.unl.edu/dbCAN2/download/Databases/V10/dbCAN-HMMdb-V10.txt && mv dbCAN-HMMdb-V10.txt dbCAN.txt && hmmpress dbCAN.txt;

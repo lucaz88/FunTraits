@@ -65,7 +65,7 @@ Maybe something you wanna set are the values `jobs` and `cores`, which control t
 #### Run the WF
 
 In the terminal, activate Snakemake and run the WF by selecting the relevant config file:
-
+??? fix code block in bullet points
 * to execute on a local server
     conda activate snakemake
     snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/local -p
