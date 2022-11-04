@@ -64,15 +64,21 @@ Maybe something you wanna set are the values `jobs` and `cores`, which control t
 
 #### Run the WF
 
-In the terminal, activate Snakemake and run the WF by selecting the relevant config file:
-??? fix code block in bullet points
-* to execute on a local server
+In the terminal, activate Snakemake and run the WF by selecting the relevant config file
+
+* for local server execution:
+
+    ```bash
     conda activate snakemake
     snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/local -p
+    ```
 
-* to execute on a cluster (!remember to adjust the config file to your cluster environment)
+* for computer cluster execution (!remember to adjust the config file to your cluster environment):
+
+    ```bash
     conda activate snakemake
     snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/sbatch -p
+    ```
 
 If you just wanna check which rules will be exectuted in the WF without actually run it, you can perform a dry run by setting the `-n` flag, e.g.:
 `snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/local -pn`
