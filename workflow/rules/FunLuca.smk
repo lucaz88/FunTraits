@@ -343,7 +343,7 @@ rule run_gblast:
     Run gblast script of the BioV suit to annotate transporters using TCdb.
     """
     input:
-        TCDB_db = config["TCDB_db"],
+        TCDB_db = "tmp_tcdb",
         i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
     output:
         i_transp = directory(os.path.join(output_dir, "BioV_transp", "{genome}")),
@@ -503,7 +503,8 @@ rule run_kofamscan:
         i_KO = os.path.join(output_dir, "KEGG_KO", "{genome}_ko.txt"),
         i_tmp = directory(os.path.join(output_dir, "KEGG_KO", "{genome}")),
     params:
-        core = 100 #config["nCORE"], 
+        core = 80 # more core will slow down the process!
+        #core = config["nCORE"], 
     conda:
         "../envs/kofamscan.yaml",
     log:

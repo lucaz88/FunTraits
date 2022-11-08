@@ -14,24 +14,24 @@ TODO:
 
 rule get_tcdb:
     """
-    Get tcdb to run tools such as gblast.
+    Get tcdb, database to gblast.
+    Database is stored locally in a tmp folder as container env seems to mount paths outside pwd as read-only.
+    '/app/test.faa' is already in the container.
     """
-    input:
-        test_faa = "databases/test.faa"
     output:
-        TCDB_db = directory(config["TCDB_db"]),
-        fake_out = temp(directory("databases/fake_out")),
+        TCDB_db = temp(directory("tmp_tcdb")),
+        fake_out = temp(directory("tmp_tcdb/fake_out")),
     container:
         "docker://lucaz88/biovx"
     log:
         command = "_logs/get_tcdb.command",
     shell:
         '''
-        mkdir -p {output.TCDB_db};
-        HOME=$(pwd)"/"{output.TCDB_db};
+        export HOME={output.TCDB_db};
         cmd="
+        mkdir -p {output.TCDB_db};
         gblast3.py
-        -i {input.test_faa}
+        -i /app/test.faa
         -o {output.fake_out};
         ";
         echo $cmd >> {log.command};

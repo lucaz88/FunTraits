@@ -73,7 +73,7 @@ In the terminal, activate Snakemake and run the WF by selecting the relevant con
     snakemake -s workflow/Run_FunLuca.smk --profile configs/snakemake/local -p
     ```
 
-* for computer cluster execution (!remember to adjust the config file to your cluster environment):
+* for computer cluster execution (! remember to adjust the config file to your cluster environment):
 
     ```bash
     conda activate snakemake
