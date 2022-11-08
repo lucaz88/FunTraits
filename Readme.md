@@ -16,7 +16,7 @@ The **generated outputs** are:
 
 * `_results/MASTER_table.tsv` containing the comprehensive summary of all annotations. It's based on a GFF format in which each row represent a gene of a genomes in the input folder, while the columns holds the information of gene location and functional annotations.
 * Genome stats about completness (using CheckM) and taxonomy (using GTDB-Tk) in the folders `_results/checkm` and `_results/gtdbtk`
-* An interactive HTML heatmap `_plot/hm_MASTERtraits_jacc.html` representing the annotated traits across genomes
+* An interactive HTML heatmap `_plot/hm_MASTERtraits_jacc.html` representing the annotated traits across genomes. The file opens correclty with Google Chrome, but has issues with Firefox.
 * Logs of all executed rules in the folder `_logs`
 * All conda environments and docker used in the WF will be stored in the folder `_tools`, while the fetched databases will be stored in the folder`databases`
 
