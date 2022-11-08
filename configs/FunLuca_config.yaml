@@ -6,8 +6,6 @@ nCORE:
 #! database:
 GTDBTk_path:
   "databases/GTDBTk"
-TCDB_db:
-  "databases/tcdb"
 
 
 #! modules to run:
