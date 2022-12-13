@@ -16,7 +16,7 @@ TODO:
 
 ##### summary table                
 
-rule make_master_table:
+rule master_table_genomes:
     """
     Combine all annotation tables into a MASTER table.
     """
@@ -29,7 +29,7 @@ rule make_master_table:
     conda:
         "../envs/R_data_parsing.yaml"
     script:
-        "../scripts/make_master_table.R"
+        "../scripts/master_table_genomes.R"
  
 
 
@@ -66,7 +66,7 @@ rule run_dbCAN:
         i_cazy = directory(os.path.join(output_dir, "dbCAN_CAZy", "{genome}")),
         i_no_seq_gff = temp(os.path.join(output_dir, "dbCAN_CAZy", "{genome}", "no_seq.gff")),
     params:
-        core = config["nCORE"],
+        ncore = min(60, config["nCORE"]),
     conda:
         "../envs/dbCAN.yaml",
     log:
@@ -81,9 +81,9 @@ rule run_dbCAN:
         -c {output.i_no_seq_gff}
         --out_dir {output.i_cazy}
         --db_dir {input.ref_db}
-        --dia_cpu {params.core}
-        --hmm_cpu {params.core}
-        --eCAMI_jobs {params.core};
+        --dia_cpu {params.ncore}
+        --hmm_cpu {params.ncore}
+        --eCAMI_jobs {params.ncore};
         ";
         echo $cmd >> {log.command};
         eval $cmd
@@ -114,9 +114,9 @@ rule blast_DMSP:
         i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
         ref_token = config["DMSP_db"]+"_token", 
     output:
-        i_phytohormone = os.path.join(output_dir, "blast_DMSP", "{genome}.tsv"),
+        i_DMSP = os.path.join(output_dir, "blast_DMSP", "{genome}.tsv"),
     params:
-        core = config["nCORE"],
+        ncore = min(60, config["nCORE"]),
         ref_db = config["DMSP_db"],
     conda:
         "../envs/blast.yaml",
@@ -128,11 +128,11 @@ rule blast_DMSP:
         blastp
         -query {input.i_gnm_dir}/*.faa
         -db {params.ref_db}
-        -out {output.i_phytohormone}
+        -out {output.i_DMSP}
         -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore stitle'
         -evalue 1e-5
         -max_target_seqs 20
-        -num_threads {params.core};
+        -num_threads {params.ncore};
         ";
         echo $cmd >> {log.command};
         eval $cmd
@@ -147,8 +147,6 @@ rule makeblastdb_DMSP:
         ref_fasta = config["DMSP_db"],
     output:
         ref_token = config["DMSP_db"]+"_token",
-    params:
-        core = config["nCORE"],
     conda:
         "../envs/blast.yaml",
     log:
@@ -192,7 +190,7 @@ rule blast_vibrioferrin:
     output:
         i_vibrioferrin = os.path.join(output_dir, "blast_vibrioferrin", "{genome}.tsv"),
     params:
-        core = config["nCORE"],
+        ncore = min(60, config["nCORE"]),
         ref_db = config["vibrioferrin_db"],
     conda:
         "../envs/blast.yaml",
@@ -208,7 +206,7 @@ rule blast_vibrioferrin:
         -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore stitle'
         -evalue 1e-5
         -max_target_seqs 20
-        -num_threads {params.core};
+        -num_threads {params.ncore};
         ";
         echo $cmd >> {log.command};
         eval $cmd
@@ -223,8 +221,6 @@ rule makeblastdb_vibrioferrin:
         ref_fasta = config["vibrioferrin_db"],
     output:
         ref_token = config["vibrioferrin_db"]+"_token",
-    params:
-        core = config["nCORE"],
     conda:
         "../envs/blast.yaml",
     log:
@@ -269,7 +265,7 @@ rule blast_phytohormones:
     output:
         i_phytohormone = os.path.join(output_dir, "blast_phytohormones", "{genome}.tsv"),
     params:
-        core = config["nCORE"],
+        ncore = min(60, config["nCORE"]),
         ref_db = config["phytohormones_db"],
     conda:
         "../envs/blast.yaml",
@@ -285,7 +281,7 @@ rule blast_phytohormones:
         -outfmt '6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore stitle'
         -evalue 1e-5
         -max_target_seqs 20
-        -num_threads {params.core};
+        -num_threads {params.ncore};
         ";
         echo $cmd >> {log.command};
         eval $cmd
@@ -300,8 +296,6 @@ rule makeblastdb_phytohormones:
         ref_fasta = config["phytohormones_db"],
     output:
         ref_token = config["phytohormones_db"]+"_token",
-    params:
-        core = config["nCORE"],
     conda:
         "../envs/blast.yaml",
     log:
@@ -331,7 +325,7 @@ rule parse_gblast:
     output:
         BioV_transp_tab = os.path.join(output_dir, "BioV_transp_tab.tsv")
     params:
-        transp_set = config["transp_set"]
+        transp_set = config["transp_set"],
     conda:
         "../envs/R_data_parsing.yaml"
     script:
@@ -369,17 +363,6 @@ rule run_gblast:
         echo $cmd >> {log.command};
         eval $cmd
         '''
-        # '''
-        # cmd="
-        # if [[ ! -L $CONDA_PREFIX/bin/hmmtop ]]; then ln -sf $HMMTOP_PATH/hmmtop $CONDA_PREFIX/bin; fi;
-        # if [[ ! -L $CONDA_PREFIX/bin/gblast3.py ]]; then ln -sf $BIOVX_PATH/*.py $CONDA_PREFIX/bin; fi;
-        # python2 $CONDA_PREFIX/bin/gblast3.py
-        # -i {input.i_gnm_dir}/*.faa
-        # -o {output.i_transp};
-        # ";
-        # echo $cmd >> {log.command};
-        # eval $cmd
-        # '''
 
 
 rule parse_antismash:
@@ -407,9 +390,9 @@ rule run_antismash:
         i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
         antismash_db = config["antim_db"],
     output:
-        i_KO = directory(os.path.join(output_dir, "antiSMASH", "{genome}")),
+        i_sm = directory(os.path.join(output_dir, "antiSMASH", "{genome}")),
     params:
-        core = config["nCORE"], 
+        ncore = config["nCORE"], 
     conda:
         "../envs/antiSMASH.yaml",
     log:
@@ -418,7 +401,7 @@ rule run_antismash:
         '''
         cmd="
         antismash
-        -c {params.core}
+        -c {params.ncore}
         --taxon bacteria 
         --fullhmmer
         --clusterhmmer
@@ -433,7 +416,7 @@ rule run_antismash:
         --rre
         --cc-mibig
         --genefinding-tool prodigal-m
-        --output-dir {output.i_KO}
+        --output-dir {output.i_sm}
         {input.i_gnm_dir}/*.gbk;
         #--cassis
         ";
@@ -457,7 +440,7 @@ rule parse_manual_fromKOs:
         "../scripts/parse_manual_fromKOs.R"
 
 
-rule KM_reconstruction_wrapper:
+rule KM_reconstruction:
     """
     Recombine KO annotations into a list of complete KEGG modules and add this info to the kofamscan table.
     """
@@ -468,7 +451,7 @@ rule KM_reconstruction_wrapper:
     params:
         KM_reco_script = "workflow/scripts/KM_reconstruction.R",
         KM_str = config["KM_str"],
-        ncore = config["nCORE"], 
+        ncore = min(80, config["nCORE"]),
     conda:
         "../envs/R_data_parsing.yaml"
     script:
@@ -501,10 +484,9 @@ rule run_kofamscan:
         kegg_ko_list = os.path.join(config["kegg_db"], "ko_list"),
     output:
         i_KO = os.path.join(output_dir, "KEGG_KO", "{genome}_ko.txt"),
-        i_tmp = directory(os.path.join(output_dir, "KEGG_KO", "{genome}")),
+        i_tmp = temp(directory(os.path.join(output_dir, "KEGG_KO", "{genome}"))),
     params:
-        core = 80 # more core will slow down the process!
-        #core = config["nCORE"], 
+        ncore = min(80, config["nCORE"]),
     conda:
         "../envs/kofamscan.yaml",
     log:
@@ -516,7 +498,7 @@ rule run_kofamscan:
         -o {output.i_KO}
         --profile={input.kegg_profiles}
         --ko-list={input.kegg_ko_list}
-        --cpu={params.core}
+        --cpu={params.ncore}
         --tmp-dir={output.i_tmp}
         {input.i_gnm_dir}/*.faa;
         ";
@@ -550,7 +532,7 @@ rule run_prokka:
     output:
         i_gnm_dir = directory(os.path.join(output_dir, "prokka", "{genome}")),
     params:
-        core = config["nCORE"], 
+        ncore = config["nCORE"], 
     conda:
         "../envs/prokka.yaml",
     log:
@@ -561,7 +543,7 @@ rule run_prokka:
         prokka
         --outdir {output.i_gnm_dir}
         {input.i_gnm}
-        --cpus {params.core}
+        --cpus {params.ncore}
         --compliant
         --rnammer
         --force
