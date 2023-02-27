@@ -26,7 +26,7 @@ The **generated outputs** are:
 
 ## How to run
 
-#### Set up the environment
+#### System requirements
 
 In order to run smoothly it requeires a system with at least 55Gb of RAM as the WF runs GTDB-Tk to assign genomes' taxonomy.
 Nodes/server used to run the WF needs to have FTP access (required to fetch annotation databases).
@@ -55,7 +55,7 @@ Then fetch the code repository from GitHub:
 
 You can either try the WF with the test genomes provided in the folder `input_genomes`, or you can delete them and place your desired genomes in that folder.
 
-Genomes are expected to be placed in that specific folder (i.e. `input_genomes`), have the extension `.fna` and not be compressed. However you can change these parameters by editing the variables `genome_dir`, `genome_ext` and `sfds` in the file `workflow/Run_FunLuca.smk`.
+Genomes are expected to be placed in that specific folder (i.e. `input_genomes`), have the extension `.fna` and not be compressed. However you can change these parameters by editing the variables `genome_dir` and `genome_ext` in the file `workflow/Run_FunLuca.smk`.
 
 #### Edit the Snakemake config file
 
