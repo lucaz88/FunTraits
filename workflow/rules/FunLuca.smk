@@ -527,8 +527,7 @@ rule run_prokka:
     Run prokka annotation on fasta files.
     """
     input:
-        i_gnm = lambda wildcards: os.path.join(genome_dir, 
-                                  genome_tab.file[genome_tab.file_noext == wildcards.genome].squeeze()),
+        i_gnm = lambda wildcards: [i for i in genome_paths if wildcards.genome in i],
     output:
         i_gnm_dir = directory(os.path.join(output_dir, "prokka", "{genome}")),
     params:

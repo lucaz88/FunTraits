@@ -27,10 +27,10 @@ configfile: "configs/FunLuca_config.yaml"
 import os
 import re
 import glob
-from scripts.myPy_FUN import find_inputs
-from scripts.myPy_FUN import col2list
-from scripts.myPy_FUN import comb_lists
-from scripts.myPy_FUN import which_drep
+from scripts.my_funs import find_inputs
+from scripts.my_funs import col2list
+from scripts.my_funs import comb_lists
+from scripts.my_funs import which_drep
 
 
 
@@ -48,6 +48,7 @@ plot_dir = "_plots"
 genome_tab = find_inputs(genome_dir, genome_ext, 
                       double_ext=False)
 genome_names = col2list(genome_tab, "file_noext")
+genome_paths = col2list(genome_tab, "full")
 run_basic = [
     os.path.join(output_dir, 'checkm'),
     os.path.join(output_dir, 'gtdbtk'),

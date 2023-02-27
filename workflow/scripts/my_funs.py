@@ -1,6 +1,19 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
  
+
+## dummy vars for testing
+from xmlrpc.client import boolean
+
+
+file_names = ["smpl_1", "smpl_2"]
+config = {}
+config["parsing_modules"] = ["demux","ccs"]
+config["assembly_long_mods"] = ["canu","flye"]
+config["binning_mods"] = ["maxbin2","metabat2"]
+config["ann_modules"] = ["prokka","KEGG_KM","BioV_transp"]
+## ---
+
       
 ## find inputs & save path and filenames as table
 def find_inputs(dir, filename_pattern, double_ext=False, uniq_PE=False):
@@ -22,8 +35,8 @@ def find_inputs(dir, filename_pattern, double_ext=False, uniq_PE=False):
         ext_list = [os.path.splitext(filename)[1] for filename in filename_list]
     path_list = [os.path.dirname(i) for i in file_list]
     
-    df = pd.DataFrame ([path_list, filename_list, filename_noext_list, ext_list]).transpose()
-    df.columns = ['dir', 'file', 'file_noext', 'ext']
+    df = pd.DataFrame ([file_list, path_list, filename_list, filename_noext_list, ext_list]).transpose()
+    df.columns = ['full','dir', 'file', 'file_noext', 'ext']
     df = df.sort_values(by=['file'])
 
     if uniq_PE:
@@ -62,7 +75,10 @@ def which_drep(drep_type, fasta_dir, sample_names):
     if drep_type == "ALL":
         out = os.path.join(fasta_dir, 'drep', drep_type)
     elif drep_type == "sample_wise" or drep_type == "use_assemblies":
-        out = [os.path.join(fasta_dir, 'drep', i) for i in sample_names]
+        if isinstance(sample_names, list):
+            out = [os.path.join(fasta_dir, 'drep', i) for i in sample_names]
+        else:
+            out = os.path.join(fasta_dir, 'drep', sample_names)
     else:
         raise ValueError('Invalid values provided for drep_type.')
     
@@ -105,18 +121,25 @@ def comb_lists(*arguments, sep = "_"):
 
 
 ## from a Pandas DataFrame, extract row matching pattern and merge selected columns using a defined separator
-def path_from_match(pandas_df, match_col, match_pattern, target_col, sep="/", make_R2=False):
+def path_from_match(pandas_df, target_col, match_col=None, match_pattern=None, sep="/", make_R2=False):
     import re
     # import pandas as pd
-    
-    if not isinstance(match_col, str) or not any([match_col == db_col for db_col in pandas_df.columns]):
-        raise ValueError('match_col has to be a single string matching one of the colum names.')
-    if not isinstance(match_pattern, str) or not any(pandas_df.loc[:, match_col] == match_pattern):
-        raise ValueError('It was not possible to find the match_pattern in the specified match_col.')
-    if not all([any(col == db_col for db_col in pandas_df.columns) for col in target_col]):
-        raise ValueError('Not all/any name/s provided for target_col match column names in the dataframe.')
-         
-    filter_row = pandas_df[pandas_df.loc[:, match_col] == match_pattern]
+       
+    if match_col is None and match_pattern is None:
+        if not all([any(col == db_col for db_col in pandas_df.columns) for col in target_col]):
+            raise ValueError('Not all/any name/s provided for target_col match column names in the dataframe.')
+
+        filter_row = pandas_df
+        
+    else:
+        if not isinstance(match_col, str) or not any([match_col == db_col for db_col in pandas_df.columns]):
+            raise ValueError('match_col has to be a single string matching one of the colum names.')
+        if not isinstance(match_pattern, str) or not any(pandas_df.loc[:, match_col] == match_pattern):
+            raise ValueError('It was not possible to find the match_pattern in the specified match_col.')
+        if not all([any(col == db_col for db_col in pandas_df.columns) for col in target_col]):
+            raise ValueError('Not all/any name/s provided for target_col match column names in the dataframe.')
+
+        filter_row = pandas_df[pandas_df.loc[:, match_col] == match_pattern]
     
     if not isinstance(target_col, list):
         target_col = [target_col]
