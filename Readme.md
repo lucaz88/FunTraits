@@ -19,7 +19,7 @@ The **generated outputs** are:
 * An interactive HTML heatmap `_plot/hm_MASTERtraits_jacc.html` representing the annotated traits across genomes. The file opens correclty with Google Chrome, but has issues with Firefox.
 * Logs of all executed rules in the folder `_logs`
 * All conda environments and docker used in the WF will be stored in the folder `_tools`
-* Fetched databases (i.e. GTDBTk, KEGG pfam and dbCAN) will be stored in the folder `databases`. [!only if you know what you are doing: you can edit the parameter `ann_dbs_path` in the file `workflow/Run_FunLuca.smk` to point to an alternative path where you already have the correct databases saved.]
+* Fetched databases (i.e. GTDBTk, KEGG pfam and dbCAN) will be stored in the folder `databases`. [**!only if you know what you are doing**: you can edit the parameter `ann_dbs_path` in the file `workflow/Run_FunLuca.smk` to point to an alternative path where you already have the correct databases saved.]
 
 ### TODO list
 

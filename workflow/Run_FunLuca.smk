@@ -39,7 +39,7 @@ genome_dir = "input_genomes"
 genome_ext = ".fna"
 genome_compressed = False # accepts False or True
 config["nCORE"] = 5 # adjust to the cores available in your system
-db_path = "databases/"
+ann_dbs_path = "databases/"
 output_dir = "_results"
 plot_dir = "_plots"
 

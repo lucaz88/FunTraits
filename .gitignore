@@ -1,1 +1,3 @@
 .snakemake/*
+_logs/*
+_results/*

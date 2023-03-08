@@ -61,7 +61,7 @@ rule run_dbCAN:
     """
     input:
         i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
-        ref_db = config["dbCAN_db"],
+        ref_db = os.path.join(ann_dbs_path, config["dbCAN_db"]),
     output:
         i_cazy = directory(os.path.join(output_dir, "dbCAN_CAZy", "{genome}")),
         i_no_seq_gff = temp(os.path.join(output_dir, "dbCAN_CAZy", "{genome}", "no_seq.gff")),
@@ -144,7 +144,7 @@ rule makeblastdb_DMSP:
     Build reference database for annotation of DMSP-degradation genes.
     """
     input:
-        ref_fasta = config["DMSP_db"],
+        ref_fasta = os.path.join(ann_dbs_path, config["DMSP_db"]),
     output:
         ref_token = config["DMSP_db"]+"_token",
     conda:
@@ -218,7 +218,7 @@ rule makeblastdb_vibrioferrin:
     Build reference database for annotation of vibrioferrin production and uptake genes.
     """
     input:
-        ref_fasta = config["vibrioferrin_db"],
+        ref_fasta = os.path.join(ann_dbs_path, config["vibrioferrin_db"]),
     output:
         ref_token = config["vibrioferrin_db"]+"_token",
     conda:
@@ -293,7 +293,7 @@ rule makeblastdb_phytohormones:
     Build reference database for annotation of phytohormone production genes.
     """
     input:
-        ref_fasta = config["phytohormones_db"],
+        ref_fasta = os.path.join(ann_dbs_path, config["phytohormones_db"]),
     output:
         ref_token = config["phytohormones_db"]+"_token",
     conda:
@@ -388,7 +388,7 @@ rule run_antismash:
     """
     input:
         i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
-        antismash_db = config["antim_db"],
+        antismash_db = os.path.join(ann_dbs_path, config["antim_db"]),
     output:
         i_sm = directory(os.path.join(output_dir, "antiSMASH", "{genome}")),
     params:
@@ -480,8 +480,8 @@ rule run_kofamscan:
     """
     input:
         i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
-        kegg_profiles = os.path.join(config["kegg_db"], "profiles"),
-        kegg_ko_list = os.path.join(config["kegg_db"], "ko_list"),
+        kegg_profiles = os.path.join(ann_dbs_path, config["kegg_db"], "profiles"),
+        kegg_ko_list = os.path.join(ann_dbs_path, config["kegg_db"], "ko_list"),
     output:
         i_KO = os.path.join(output_dir, "KEGG_KO", "{genome}_ko.txt"),
         i_tmp = temp(directory(os.path.join(output_dir, "KEGG_KO", "{genome}"))),

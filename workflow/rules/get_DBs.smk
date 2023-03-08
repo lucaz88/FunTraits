@@ -41,7 +41,7 @@ rule get_tcdb:
 
 rule get_GTDBTk_DB:
     output:
-        GTDBTk_path = directory(config["GTDBTk_path"]),
+        GTDBTk_path = directory(os.path.join(ann_dbs_path, config["GTDBTk_path"])),
     # conda:
     #     "../envs/GTDB_Tk.yaml",
     log:
@@ -61,7 +61,7 @@ rule get_GTDBTk_DB:
         
 rule update_dbCAN_DB:
     output:
-        dbCAN_dir = directory(config["dbCAN_db"]),
+        dbCAN_dir = directory(os.path.join(ann_dbs_path, config["dbCAN_db"])),
     conda:
         "../envs/dbCAN.yaml",
     log:
@@ -84,7 +84,7 @@ rule update_dbCAN_DB:
 
 rule get_antismash_DB:
     output:
-        fake_out = config["antim_db"],
+        fake_out = os.path.join(ann_dbs_path, config["antim_db"]),
     conda:
         "../envs/antiSMASH.yaml",
     log:
@@ -101,9 +101,9 @@ rule get_antismash_DB:
 
 rule get_kofamscan_DB:
     output:
-        kegg_db = directory(config["kegg_db"]),
-        kegg_profiles = directory(os.path.join(config["kegg_db"], "profiles")),
-        kegg_ko_list = os.path.join(config["kegg_db"], "ko_list"),
+        kegg_db = directory(os.path.join(ann_dbs_path, config["kegg_db"])),
+        kegg_profiles = directory(os.path.join(ann_dbs_path, config["kegg_db"], "profiles")),
+        kegg_ko_list = os.path.join(ann_dbs_path, config["kegg_db"], "ko_list"),
     log:
         command = "_logs/get_kofamscan_DB.command",
     shell:
