@@ -18,7 +18,8 @@ The **generated outputs** are:
 * Genome stats about completness (using CheckM) and taxonomy (using GTDB-Tk) in the folders `_results/checkm` and `_results/gtdbtk`
 * An interactive HTML heatmap `_plot/hm_MASTERtraits_jacc.html` representing the annotated traits across genomes. The file opens correclty with Google Chrome, but has issues with Firefox.
 * Logs of all executed rules in the folder `_logs`
-* All conda environments and docker used in the WF will be stored in the folder `_tools`, while the fetched databases will be stored in the folder`databases`
+* All conda environments and docker used in the WF will be stored in the folder `_tools`
+* Fetched databases (i.e. GTDBTk, KEGG pfam and dbCAN) will be stored in the folder `databases`. [!only if you know what you are doing: you can edit the parameter `ann_dbs_path` in the file `workflow/Run_FunLuca.smk` to point to an alternative path where you already have the correct databases saved.]
 
 ### TODO list
 
@@ -53,9 +54,11 @@ Then fetch the code repository from GitHub:
 
 #### Prepare input files
 
-You can either try the WF with the test genomes provided in the folder `input_genomes`, or you can delete them and place your desired genomes in that folder.
+You can try the WF with the test genomes provided in the folder `input_genomes`.
+If you wanna run the WF on your desired genomes you can either:
 
-Genomes are expected to be placed in that specific folder (i.e. `input_genomes`), have the extension `.fna` and not be compressed. However you can change these parameters by editing the variables `genome_dir` and `genome_ext` in the file `workflow/Run_FunLuca.smk`.
+* copy their fasta files into the folder `input_genomes` and delete the test genomes. Fasta are expected to have the extension `.fna` and not be compressed.
+* in the file `workflow/Run_FunLuca.smk`, edit the parameters `genome_dir` to specify a custom folder for the fasta files, `genome_ext` for alternative extension (e.g. `.fa`) and/or set `genome_compressed` to `True` if fasta are compresed
 
 #### Edit the Snakemake config file
 
