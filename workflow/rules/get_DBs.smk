@@ -29,7 +29,8 @@ rule get_tcdb:
         '''
         export HOME={output.TCDB_db};
         cmd="
-        mkdir -p {output.TCDB_db};
+        mkdir -p {output.TCDB_db}
+        ;
         gblast3.py
         -i /app/test.faa
         -o {output.fake_out};
@@ -49,11 +50,15 @@ rule get_GTDBTk_DB:
     shell:
         '''
         cmd="
-        mkdir -p {output.GTDBTk_path};
-        cd {output.GTDBTk_path};
-        wget https://data.ace.uq.edu.au/public/gtdb/data/releases/latest/auxillary_files/gtdbtk_v2_data.tar.gz;
-        tar xvzf gtdbtk_v2_data.tar.gz;
-        rm gtdbtk_v2_data.tar.gz;
+        mkdir -p {output.GTDBTk_path}
+        ;
+        cd {output.GTDBTk_path}
+        ;
+        wget https://data.ace.uq.edu.au/public/gtdb/data/releases/latest/auxillary_files/gtdbtk_v2_data.tar.gz
+        ;
+        tar xvzf gtdbtk_v2_data.tar.gz
+        ;
+        rm gtdbtk_v2_data.tar.gz
         ";
         eval $cmd
         '''
@@ -69,14 +74,23 @@ rule update_dbCAN_DB:
     shell:
         '''
         cmd="
-        mkdir -p {output.dbCAN_dir};
-        cd {output.dbCAN_dir};
-        wget http://bcb.unl.edu/dbCAN2/download/CAZyDB.09242021.fa && diamond makedb --in CAZyDB.09242021.fa -d CAZy;
-        wget https://bcb.unl.edu/dbCAN2/download/Databases/V10/dbCAN-HMMdb-V10.txt && mv dbCAN-HMMdb-V10.txt dbCAN.txt && hmmpress dbCAN.txt;
-        wget http://bcb.unl.edu/dbCAN2/download/Databases/tcdb.fa && diamond makedb --in tcdb.fa -d tcdb;
-        wget http://bcb.unl.edu/dbCAN2/download/Databases/tf-1.hmm && hmmpress tf-1.hmm;
-        wget http://bcb.unl.edu/dbCAN2/download/Databases/tf-2.hmm && hmmpress tf-2.hmm;
-        wget http://bcb.unl.edu/dbCAN2/download/Databases/stp.hmm && hmmpress stp.hmm;
+        mkdir -p {output.dbCAN_dir}
+        ;
+        cd {output.dbCAN_dir}
+        ;
+        wget http://bcb.unl.edu/dbCAN2/download/CAZyDB.09242021.fa && diamond makedb --in CAZyDB.09242021.fa -d CAZy
+        ;
+        wget https://bcb.unl.edu/dbCAN2/download/Databases/V10/dbCAN-HMMdb-V10.txt && mv dbCAN-HMMdb-V10.txt dbCAN.txt && hmmpress dbCAN.txt
+        ;
+        wget http://bcb.unl.edu/dbCAN2/download/Databases/tcdb.fa && diamond makedb --in tcdb.fa -d tcdb
+        ;
+        wget http://bcb.unl.edu/dbCAN2/download/Databases/tf-1.hmm && hmmpress tf-1.hmm
+        ;
+        wget http://bcb.unl.edu/dbCAN2/download/Databases/tf-2.hmm && hmmpress tf-2.hmm
+        ;
+        wget http://bcb.unl.edu/dbCAN2/download/Databases/stp.hmm && hmmpress stp.hmm
+        ;
+        touch $(date +'%Y.%m.%d')
         ";
         eval $cmd
         '''
@@ -92,8 +106,9 @@ rule get_antismash_DB:
     shell:
         '''
         cmd="
-        download-antismash-databases;
-        touch {output.fake_out};
+        download-antismash-databases
+        ;
+        touch {output.fake_out}
         ";
         eval $cmd
         '''
@@ -109,13 +124,21 @@ rule get_kofamscan_DB:
     shell:
         '''
         cmd="
-        mkdir -p {output.kegg_db};
-        wget ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz -O {output.kegg_db}/profiles.tar.gz;
-        tar zxf {output.kegg_db}/profiles.tar.gz -C {output.kegg_db};
-        rm {output.kegg_db}/profiles.tar.gz;
-        wget ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz -O {output.kegg_db}/ko_list.gz;
-        gzip -d {output.kegg_db}/ko_list.gz;
-        touch {output.kegg_profiles} {output.kegg_ko_list};
+        mkdir -p {output.kegg_db}
+        ;
+        wget ftp://ftp.genome.jp/pub/db/kofam/profiles.tar.gz -O {output.kegg_db}/profiles.tar.gz
+        ;
+        tar zxf {output.kegg_db}/profiles.tar.gz -C {output.kegg_db}
+        ;
+        rm {output.kegg_db}/profiles.tar.gz
+        ;
+        wget ftp://ftp.genome.jp/pub/db/kofam/ko_list.gz -O {output.kegg_db}/ko_list.gz
+        ;
+        gzip -d {output.kegg_db}/ko_list.gz
+        ;
+        touch {output.kegg_profiles} {output.kegg_ko_list}
+        ;
+        touch $(date +'%Y.%m.%d')
         ";
         echo $cmd >> {log.command}; 
         eval $cmd

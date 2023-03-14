@@ -232,9 +232,10 @@ rule run_gtdbtk:
     Taxonomic classification of dereplicated MAGs with GTDB-Tk.
     """
     input:
-        gnm_dir = genome_dir,
+        in_gnms = genome_paths,
         GTDBTk_path = os.path.join(ann_dbs_path, config["GTDBTk_path"]),
     output:
+        tmp_link = temp(directory(os.path.join(output_dir, 'tmp_gtdbtk'))),
         gtdbtk_dir = directory(os.path.join(output_dir, 'gtdbtk')),
     params:
         genome_ext = genome_ext,
@@ -250,13 +251,17 @@ rule run_gtdbtk:
         command = "_logs/run_gtdbtk.command"
     shell:
         '''
-        GTDBTk_path=$(pwd)"/"{input.GTDBTk_path};
-        GTDBTk_path=$(find $GTDBTk_path -type d -name "release*");
-        export GTDBTK_DATA_PATH=$GTDBTk_path;
+        GTDBTk_path={input.GTDBTk_path}
+        GTDBTk_path2=$(find $GTDBTk_path -type d -name "release*")
+        export GTDBTK_DATA_PATH=$GTDBTk_path2
         cmd="
+        mkdir {output.tmp_link}
+        ;
+        cp {input.in_gnms} {output.tmp_link}
+        ;
         gtdbtk
         classify_wf
-        --genome_dir {input.gnm_dir}
+        --genome_dir {output.tmp_link}
         --out_dir {output.gtdbtk_dir}
         --extension {params.genome_ext}
         --cpus {params.ncore}

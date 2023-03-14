@@ -395,6 +395,8 @@ rule run_antismash:
         ncore = config["nCORE"], 
     conda:
         "../envs/antiSMASH.yaml",
+    # resources:
+    #     time = "1:59:00",
     log:
         command = "_logs/run_antismash_{genome}.command",
     shell:

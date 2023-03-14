@@ -60,10 +60,17 @@ If you wanna run the WF on your desired genomes you can either:
 * copy their fasta files into the folder `input_genomes` and delete the test genomes. Fasta are expected to have the extension `.fna` and not be compressed.
 * in the file `workflow/Run_FunLuca.smk`, edit the parameters `genome_dir` to specify a custom folder for the fasta files, `genome_ext` for alternative extension (e.g. `.fa`) and/or set `genome_compressed` to `True` if fasta are compresed
 
-#### Edit the Snakemake config file
+#### Snakemake config file
 
-This files controls how Snakemake use the available resources to run the WF. Two files are already provided to run on local (`configs/snakemake/local/config.yaml`) and on a computing cluster (`configs/snakemake/sbatch/config.yaml`), however check the "Profiles" section in the Snakemake documentation (https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles) to learn how to properly tune such file.
-Maybe something you wanna set are the values `jobs` and `cores`, which control the degree of parallelization (i.e. the number of jobs to execute in parallel and how many cores EACH job can take), and adjust them to the resources available in your system. E.g. if your computer has 32 cores you could run 6 jobs in parallel with 5 cores each.
+This files controls how Snakemake use the available resources to run the WF.
+Two files are already provided to run on local computer (`configs/snakemake/local/config.yaml`) and on High-performance computing (HPC) cluster (`configs/snakemake/sbatch/config.yaml`).
+Check the "Profiles" section in the Snakemake documentation (https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles) to learn how to properly tune such file.
+
+N.B. a "shortcut" to adjust the number of cores used by the different tools is provided with the parameter `config["nCORE"]` in the file `workflow/Run_FunLuca.smk`. Edit this value will overwirde the Snakemake config file (i.e. no need to edit this).
+
+Something you may wanna change are the values `jobs` and `cores`, which control the degree of parallelization (i.e. the number of jobs to execute in parallel and how many cores EACH job can take), and adjust them to the resources available in your system. E.g. if your computer has 32 cores you could run 6 jobs in parallel with 5 cores each.
+
+N.B. when computing on HPC clusters do not set `cores` number to low (e.g. <10) as some tools may run out of time and fail (`time` parameter is left to defaul in most rules which usually correspond to 1h in most HPC configuration).
 
 #### Run the WF
 
