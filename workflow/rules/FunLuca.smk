@@ -117,7 +117,7 @@ rule blast_DMSP:
         i_DMSP = os.path.join(output_dir, "blast_DMSP", "{genome}.tsv"),
     params:
         ncore = min(60, config["nCORE"]),
-        ref_db = os.path.join(ann_dbs_path, config["DMSP_db"]),
+        ref_db = os.path.join(ann_dbs_path, "DMSP_db"),
     conda:
         "../envs/blast.yaml",
     log:
@@ -144,8 +144,9 @@ rule makeblastdb_DMSP:
     Build reference database for annotation of DMSP-degradation genes.
     """
     input:
-        ref_fasta = os.path.join(ann_dbs_path, config["DMSP_db"]),
+        ref_fasta = config["DMSP_db"],
     output:
+        ref_db = os.path.join(ann_dbs_path, "DMSP_db"),
         ref_token = os.path.join(ann_dbs_path, config["DMSP_db"]+"_token"),
     conda:
         "../envs/blast.yaml",
@@ -156,7 +157,9 @@ rule makeblastdb_DMSP:
         cmd="
         makeblastdb 
         -in {input.ref_fasta} 
-        -dbtype prot;
+        -dbtype prot
+        -out {output.ref_db}
+        ;
         touch {output.ref_token}
         ";
         echo $cmd >> {log.command};
@@ -191,7 +194,7 @@ rule blast_vibrioferrin:
         i_vibrioferrin = os.path.join(output_dir, "blast_vibrioferrin", "{genome}.tsv"),
     params:
         ncore = min(60, config["nCORE"]),
-        ref_db = os.path.join(ann_dbs_path, config["vibrioferrin_db"]),
+        ref_db = os.path.join(ann_dbs_path, "vibrioferrin_db"),
     conda:
         "../envs/blast.yaml",
     log:
@@ -218,8 +221,9 @@ rule makeblastdb_vibrioferrin:
     Build reference database for annotation of vibrioferrin production and uptake genes.
     """
     input:
-        ref_fasta = os.path.join(ann_dbs_path, config["vibrioferrin_db"]),
+        ref_fasta = config["vibrioferrin_db"],
     output:
+        ref_db = os.path.join(ann_dbs_path, "vibrioferrin_db"),
         ref_token = os.path.join(ann_dbs_path, config["vibrioferrin_db"]+"_token"),
     conda:
         "../envs/blast.yaml",
@@ -230,7 +234,9 @@ rule makeblastdb_vibrioferrin:
         cmd="
         makeblastdb 
         -in {input.ref_fasta} 
-        -dbtype prot;
+        -dbtype prot
+        -out {output.ref_db}
+        ;
         touch {output.ref_token}
         ";
         echo $cmd >> {log.command};
@@ -266,7 +272,7 @@ rule blast_phytohormones:
         i_phytohormone = os.path.join(output_dir, "blast_phytohormones", "{genome}.tsv"),
     params:
         ncore = min(60, config["nCORE"]),
-        ref_db = os.path.join(ann_dbs_path, config["phytohormones_db"]),
+        ref_db = os.path.join(ann_dbs_path, "phytohormones_db"),
     conda:
         "../envs/blast.yaml",
     log:
@@ -293,8 +299,9 @@ rule makeblastdb_phytohormones:
     Build reference database for annotation of phytohormone production genes.
     """
     input:
-        ref_fasta = os.path.join(ann_dbs_path, config["phytohormones_db"]),
+        ref_fasta = config["phytohormones_db"],
     output:
+        ref_db = os.path.join(ann_dbs_path, "phytohormones_db"),
         ref_token = os.path.join(ann_dbs_path, config["phytohormones_db"]+"_token"),
     conda:
         "../envs/blast.yaml",
@@ -305,7 +312,9 @@ rule makeblastdb_phytohormones:
         cmd="
         makeblastdb 
         -in {input.ref_fasta} 
-        -dbtype prot;
+        -dbtype prot
+        -out {output.ref_db}
+        ;
         touch {output.ref_token}
         ";
         echo $cmd >> {log.command};

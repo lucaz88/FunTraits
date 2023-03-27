@@ -44,17 +44,17 @@ transp_set: # transporter set retained: all - B1_B12_B3_B7_SIDERO - WITH_SUBSTRA
 
 ##! blast-phytohormones
 phytohormones_db:
-  "custom_fasta/Protein_sequences_for_phytohormone_pathways_annotation.fasta"
+  "databases/custom_fasta/Protein_sequences_for_phytohormone_pathways_annotation.fasta"
 phyhorm_suppl_tab: # table providing manually curated pathway structures 
   "databases/FunLuca_phytohormones.xlsx"
 
 ##! blast-vibrioferrin
 vibrioferrin_db:
-  "custom_fasta/Protein_sequences_for_vibrioferrin_pathways_annotation_01mai20.fasta"
+  "databases/custom_fasta/Protein_sequences_for_vibrioferrin_pathways_annotation_01mai20.fasta"
 
 ##! blast-DMSP
 DMSP_db:
-  "custom_fasta/Protein_sequences_for_DMSP_pathways_annotation_21dec20.fasta"
+  "databases/custom_fasta/Protein_sequences_for_DMSP_pathways_annotation_21dec20.fasta"
 
 ##! dbCAN
 dbCAN_db:
