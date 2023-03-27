@@ -112,12 +112,12 @@ rule blast_DMSP:
     """
     input:
         i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
-        ref_token = config["DMSP_db"]+"_token", 
+        ref_token = os.path.join(ann_dbs_path, config["DMSP_db"]+"_token"),
     output:
         i_DMSP = os.path.join(output_dir, "blast_DMSP", "{genome}.tsv"),
     params:
         ncore = min(60, config["nCORE"]),
-        ref_db = config["DMSP_db"],
+        ref_db = os.path.join(ann_dbs_path, config["DMSP_db"]),
     conda:
         "../envs/blast.yaml",
     log:
@@ -146,7 +146,7 @@ rule makeblastdb_DMSP:
     input:
         ref_fasta = os.path.join(ann_dbs_path, config["DMSP_db"]),
     output:
-        ref_token = config["DMSP_db"]+"_token",
+        ref_token = os.path.join(ann_dbs_path, config["DMSP_db"]+"_token"),
     conda:
         "../envs/blast.yaml",
     log:
@@ -186,12 +186,12 @@ rule blast_vibrioferrin:
     """
     input:
         i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
-        ref_token = config["vibrioferrin_db"]+"_token", 
+        ref_token = os.path.join(ann_dbs_path, config["vibrioferrin_db"]+"_token"),
     output:
         i_vibrioferrin = os.path.join(output_dir, "blast_vibrioferrin", "{genome}.tsv"),
     params:
         ncore = min(60, config["nCORE"]),
-        ref_db = config["vibrioferrin_db"],
+        ref_db = os.path.join(ann_dbs_path, config["vibrioferrin_db"]),
     conda:
         "../envs/blast.yaml",
     log:
@@ -220,7 +220,7 @@ rule makeblastdb_vibrioferrin:
     input:
         ref_fasta = os.path.join(ann_dbs_path, config["vibrioferrin_db"]),
     output:
-        ref_token = config["vibrioferrin_db"]+"_token",
+        ref_token = os.path.join(ann_dbs_path, config["vibrioferrin_db"]+"_token"),
     conda:
         "../envs/blast.yaml",
     log:
@@ -261,12 +261,12 @@ rule blast_phytohormones:
     """
     input:
         i_gnm_dir = os.path.join(output_dir, "prokka", "{genome}"),
-        ref_token = config["phytohormones_db"]+"_token", 
+        ref_token = os.path.join(ann_dbs_path, config["phytohormones_db"]+"_token"),
     output:
         i_phytohormone = os.path.join(output_dir, "blast_phytohormones", "{genome}.tsv"),
     params:
         ncore = min(60, config["nCORE"]),
-        ref_db = config["phytohormones_db"],
+        ref_db = os.path.join(ann_dbs_path, config["phytohormones_db"]),
     conda:
         "../envs/blast.yaml",
     log:
@@ -295,7 +295,7 @@ rule makeblastdb_phytohormones:
     input:
         ref_fasta = os.path.join(ann_dbs_path, config["phytohormones_db"]),
     output:
-        ref_token = config["phytohormones_db"]+"_token",
+        ref_token = os.path.join(ann_dbs_path, config["phytohormones_db"]+"_token"),
     conda:
         "../envs/blast.yaml",
     log:
