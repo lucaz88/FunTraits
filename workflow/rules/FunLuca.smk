@@ -146,8 +146,9 @@ rule makeblastdb_DMSP:
     input:
         ref_fasta = config["DMSP_db"],
     output:
-        ref_db = os.path.join(ann_dbs_path, "DMSP_db"),
         ref_token = os.path.join(ann_dbs_path, config["DMSP_db"]+"_token"),
+    params:
+        ref_db = os.path.join(ann_dbs_path, "DMSP_db"),
     conda:
         "../envs/blast.yaml",
     log:
@@ -158,7 +159,7 @@ rule makeblastdb_DMSP:
         makeblastdb 
         -in {input.ref_fasta} 
         -dbtype prot
-        -out {output.ref_db}
+        -out {params.ref_db}
         ;
         touch {output.ref_token}
         ";
@@ -223,8 +224,9 @@ rule makeblastdb_vibrioferrin:
     input:
         ref_fasta = config["vibrioferrin_db"],
     output:
-        ref_db = os.path.join(ann_dbs_path, "vibrioferrin_db"),
         ref_token = os.path.join(ann_dbs_path, config["vibrioferrin_db"]+"_token"),
+    params:
+        ref_db = os.path.join(ann_dbs_path, "vibrioferrin_db"),
     conda:
         "../envs/blast.yaml",
     log:
@@ -235,7 +237,7 @@ rule makeblastdb_vibrioferrin:
         makeblastdb 
         -in {input.ref_fasta} 
         -dbtype prot
-        -out {output.ref_db}
+        -out {params.ref_db}
         ;
         touch {output.ref_token}
         ";
@@ -301,8 +303,9 @@ rule makeblastdb_phytohormones:
     input:
         ref_fasta = config["phytohormones_db"],
     output:
-        ref_db = os.path.join(ann_dbs_path, "phytohormones_db"),
         ref_token = os.path.join(ann_dbs_path, config["phytohormones_db"]+"_token"),
+    params:
+        ref_db = os.path.join(ann_dbs_path, "phytohormones_db"),
     conda:
         "../envs/blast.yaml",
     log:
@@ -313,7 +316,7 @@ rule makeblastdb_phytohormones:
         makeblastdb 
         -in {input.ref_fasta} 
         -dbtype prot
-        -out {output.ref_db}
+        -out {params.ref_db}
         ;
         touch {output.ref_token}
         ";
