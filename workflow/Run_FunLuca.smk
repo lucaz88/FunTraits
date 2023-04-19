@@ -29,8 +29,6 @@ import re
 import glob
 from scripts.my_funs import find_inputs
 from scripts.my_funs import col2list
-from scripts.my_funs import comb_lists
-from scripts.my_funs import which_drep
 
 
 

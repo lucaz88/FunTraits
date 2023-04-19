@@ -13,6 +13,9 @@ TODO:
     - check log for commands using "2> {log.command}"
 """
 
+#! declare vars
+from scripts.my_funs import time_per_gb
+
 
 
 
@@ -277,8 +280,9 @@ rule run_checkm:
     Compute quality metrics on genomes.
     """
     input:
-        gnm_dir = genome_dir,
+        gnm_list = genome_paths,
     output:
+        gnm_dir = temp(directory(os.path.join(output_dir, 'tmp_gnm'))),
         checkm_dir = directory(os.path.join(output_dir, 'checkm')),
     params:
         ext = re.sub("^\\.", "", genome_ext),
@@ -286,18 +290,22 @@ rule run_checkm:
         # ncore = config["nCORE"],
     conda:
         "../envs/CheckM.yaml"
-    # resources:
-    #     time = "03:59:00",
+    resources:
+        time = time_per_gb,
     log:
         command = "_logs/run_checkm.command"
     shell:
         '''
         cmd="
+        mkdir {output.gnm_dir}
+        ;
+        cp {input.gnm_list} {output.gnm_dir}
+        ;
         checkm
         lineage_wf
         -t {params.ncore}
         -x {params.ext}
-        {input.gnm_dir}
+        {output.gnm_dir}
         {output.checkm_dir}
         ;
         checkm 
