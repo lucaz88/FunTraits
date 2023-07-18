@@ -1,3 +1,4 @@
 .snakemake/*
 _logs/*
 _results/*
+databases/.Rhistory
